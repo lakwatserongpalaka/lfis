@@ -1,0 +1,4 @@
+body{background:#111;color:#eee;font-family:Georgia,serif;display:flex;justify-content:center;align-items:center;height:100vh}
+.card{width:700px;background:#1b1b1b;padding:40px;border-radius:14px;box-shadow:0 0 20px #000}
+input{width:100%;padding:14px;margin:18px 0;background:#222;color:#fff;border:1px solid #555}
+button{padding:12px 20px} #out{margin-top:24px;white-space:pre-wrap}.tag{color:#bbb}
