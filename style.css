@@ -1,427 +1,181 @@
-/* ==========================================================
-   LFIS v1.0.0-alpha
-   Sprint 1 – Consultation First
-   ========================================================== */
-
-:root{
-
-    --bg:#171615;
-    --surface:#211f1d;
-    --surface-hover:#292624;
-
-    --text:#f4f0ea;
-    --muted:#b9b1a6;
-
-    --border:#393530;
-
-    --accent:#b89d67;
-
-    --shadow:0 20px 60px rgba(0,0,0,.25);
-
-    --radius:18px;
-
-    --max-width:920px;
-
-}
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
-
-    background:var(--bg);
-
-    color:var(--text);
-
-    font-family:Georgia, serif;
-
-    line-height:1.75;
-
-}
-
-.container{
-
-    width:min(92%, var(--max-width));
-
-    margin:90px auto;
-
-}
-
-.hero{
-
+    background:#f5f3ef;
+    color:#222;
+    font-family:Georgia, "Times New Roman", serif;
     display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:50px 20px;
+}
 
-    flex-direction:column;
-
-    gap:26px;
-
+.card{
+    width:100%;
+    max-width:760px;
+    background:#ffffff;
+    padding:60px;
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
 }
 
 .eyebrow{
-
-    color:var(--muted);
-
-    font-size:.9rem;
-
-    letter-spacing:.18em;
-
     text-transform:uppercase;
-
+    letter-spacing:3px;
+    font-size:12px;
+    color:#8b7d6b;
+    margin-bottom:18px;
 }
 
 h1{
-
-    font-size:clamp(2.8rem,6vw,4.5rem);
-
-    line-height:1.05;
-
-    font-weight:600;
-
+    font-size:58px;
+    font-weight:normal;
+    margin-bottom:6px;
 }
 
-.lead{
-
-    font-size:1.45rem;
-
-    color:var(--text);
-
+h2{
+    font-size:22px;
+    font-weight:normal;
+    color:#666;
+    margin-bottom:28px;
 }
 
-.intro{
-
-    color:var(--muted);
-
-    max-width:720px;
-
-    font-size:1.05rem;
-
+.hero{
+    font-size:24px;
+    line-height:1.7;
+    color:#333;
+    margin-bottom:40px;
 }
 
-.consultation{
-
-    margin-top:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
+.divider{
+    width:70px;
+    height:1px;
+    background:#d7c9b6;
+    margin:40px 0;
 }
 
-.label-large{
-
-    font-size:1.15rem;
-
-    font-weight:600;
-
+h3{
+    font-size:26px;
+    font-weight:normal;
+    margin-bottom:12px;
 }
 
-textarea{
-
-    width:100%;
-
-    min-height:170px;
-
-    resize:vertical;
-
-    border:1px solid var(--border);
-
-    border-radius:var(--radius);
-
-    background:var(--surface);
-
-    color:var(--text);
-
-    padding:24px;
-
-    font-size:1rem;
-
+.subtitle{
+    color:#777;
     line-height:1.8;
+    margin-bottom:24px;
+}
 
-    outline:none;
-
+input{
+    width:100%;
+    padding:18px 22px;
+    border:1px solid #d9d4cd;
+    border-radius:12px;
+    font-size:17px;
+    margin-bottom:20px;
+    background:#fcfbf9;
     transition:.25s;
-
 }
 
-textarea::placeholder{
-
-    color:#9d968d;
-
-}
-
-textarea:focus{
-
-    border-color:var(--accent);
-
-    box-shadow:0 0 0 4px rgba(184,157,103,.12);
-
+input:focus{
+    outline:none;
+    border-color:#8b7d6b;
+    box-shadow:0 0 0 4px rgba(139,125,107,.12);
 }
 
 button{
-
-    align-self:flex-start;
-
-    background:var(--accent);
-
-    color:#171615;
-
+    width:100%;
+    padding:18px;
     border:none;
-
-    border-radius:999px;
-
-    padding:15px 32px;
-
-    font-size:1rem;
-
-    font-weight:600;
-
+    border-radius:12px;
+    background:#222;
+    color:white;
+    font-size:17px;
     cursor:pointer;
-
     transition:.25s;
-
 }
 
 button:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:var(--shadow);
-
+    background:#444;
 }
 
-.browse{
-
-    margin-top:46px;
-
-    color:var(--muted);
-
+.quick-search{
+    margin-top:34px;
 }
 
-.browse p{
-
-    margin-bottom:8px;
-
+.quick-search span{
+    display:block;
+    margin-bottom:14px;
+    color:#777;
+    font-size:14px;
 }
 
-.browse a{
-
-    color:var(--text);
-
-    text-decoration:none;
-
-    border-bottom:1px solid transparent;
-
-    transition:.25s;
-
+.chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
 }
 
-.browse a:hover{
-
-    color:var(--accent);
-
-    border-color:var(--accent);
-
+.chip{
+    width:auto;
+    background:#f2efe9;
+    color:#555;
+    padding:10px 18px;
+    border-radius:999px;
+    font-size:14px;
 }
 
-#results{
+.chip:hover{
+    background:#e6dfd5;
+}
 
-    margin-top:70px;
+#out{
+    margin-top:40px;
+}
 
+.empty{
+    text-align:center;
+    padding:40px 20px;
+    border:1px dashed #d7c9b6;
+    border-radius:14px;
+    color:#777;
+}
+
+.empty h3{
+    margin-bottom:14px;
+}
+
+footer{
+    margin-top:50px;
+    padding-top:24px;
+    border-top:1px solid #ece8e2;
+    text-align:center;
+    color:#888;
+    font-size:13px;
+    line-height:1.8;
+}
+
+footer span{
+    color:#999;
 }
 
 @media (max-width:768px){
 
-    .container{
-
-        margin:50px auto;
-
-    }
-
-    h1{
-
-        font-size:2.7rem;
-
-    }
-
-    .lead{
-
-        font-size:1.2rem;
-
-    }
-
-}
-.understanding-list{
-    list-style:none;
-    margin:24px 0;
-    padding:0;
+.card{
+    padding:35px;
 }
 
-.understanding-list li{
-    padding:10px 0;
-    color:var(--text);
-    border-bottom:1px solid var(--border);
-}
-.fade{
-    animation:fade .45s ease;
+h1{
+    font-size:42px;
 }
 
-@keyframes fade{
-    from{
-        opacity:0;
-        transform:translateY(12px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.hero{
+    font-size:20px;
 }
-
-.choice{
-
-    margin:18px 0;
-
-    padding:22px;
-
-    border:1px solid var(--border);
-
-    border-radius:16px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-    background:var(--surface);
-
-}
-
-.choice:hover{
-
-    border-color:var(--accent);
-
-    transform:translateY(-2px);
-
-    box-shadow:var(--shadow);
-
-}
-/* ==========================================================
-   Recommendation Card
-========================================================== */
-
-.recommendation hr{
-
-    margin:34px 0;
-
-    border:none;
-
-    border-top:1px solid var(--border);
-
-}
-
-.fragrance-title{
-
-    margin-top:8px;
-
-    margin-bottom:6px;
-
-}
-
-.brand-name{
-
-    color:var(--muted);
-
-    margin-bottom:26px;
-
-}
-
-.confidence{
-
-    margin:28px 0;
-
-}
-
-.confidence-number{
-
-    display:block;
-
-    font-size:3rem;
-
-    font-weight:700;
-
-    color:var(--accent);
-
-}
-
-.confidence-label{
-
-    color:var(--muted);
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
-
-    font-size:.8rem;
-
-}
-
-.recommendation h3{
-
-    margin-top:34px;
-
-    margin-bottom:14px;
-
-    font-weight:600;
-
-}
-
-.recommendation-list{
-
-    margin-left:22px;
-
-    line-height:2;
-
-}
-
-blockquote{
-
-    margin:20px 0;
-
-    padding:20px 24px;
-
-    border-left:4px solid var(--accent);
-
-    color:var(--muted);
-
-    font-style:italic;
-
-    background:rgba(255,255,255,.03);
-
-}
-
-.recommendation-actions{
-
-    display:flex;
-
-    gap:14px;
-
-    flex-wrap:wrap;
-
-    margin-top:40px;
-
-}
-
-.recommendation-actions button{
-
-    flex:1;
-
-    min-width:180px;
 
 }
