@@ -4,52 +4,84 @@
     "brand": "Tom Ford",
     "name": "Neroli Portofino",
     "family": "Citrus Aromatic",
-    "accords": [
-      "Citrus",
-      "White Floral",
-      "Fresh",
-      "Aromatic"
-    ],
-    "topNotes": [
-      "Bergamot",
-      "Mandarin",
-      "Lemon",
-      "Lavender",
-      "Myrtle",
-      "Rosemary"
-    ],
-    "middleNotes": [
-      "African Orange Flower",
-      "Neroli",
-      "Jasmine",
-      "Pittosporum"
-    ],
-    "baseNotes": [
-      "Amber",
-      "Angelica",
-      "Ambrette"
-    ],
-    "season": [
-      "Spring",
-      "Summer"
-    ],
-    "occasion": [
-      "Vacation",
-      "Beach",
-      "Resort",
-      "Daytime"
-    ],
-    "personality": "Sophisticated, relaxed and effortlessly luxurious.",
-    "editorial": "Neroli Portofino captures the feeling of stepping onto the Italian Riviera. Bright citrus, aromatic herbs and clean white florals create an atmosphere of understated luxury rather than loud attention.",
+    "editorial": "Neroli Portofino captures the feeling of stepping onto the Italian Riviera. Bright citrus, aromatic herbs and clean white florals create an atmosphere of understated luxury.",
     "consultant": "Perfect when you want to smell fresh, polished and quietly expensive.",
     "keywords": [
       "fresh",
       "citrus",
       "summer",
-      "luxury",
       "vacation",
       "resort",
-      "neroli"
+      "luxury",
+      "hotel lobby",
+      "beach"
+    ]
+  },
+  {
+    "id": 2,
+    "brand": "Prada",
+    "name": "Prada L'Homme",
+    "family": "Woody Floral Musk",
+    "editorial": "Prada L'Homme is a masterclass in understated elegance. Clean, refined and effortlessly professional.",
+    "consultant": "One of the safest recommendations for office and everyday elegance.",
+    "keywords": [
+      "office",
+      "professional",
+      "clean",
+      "executive",
+      "hotel lobby",
+      "signature",
+      "fresh",
+      "elegant"
+    ]
+  },
+  {
+    "id": 3,
+    "brand": "Chanel",
+    "name": "Bleu de Chanel EDT",
+    "family": "Woody Aromatic",
+    "editorial": "The benchmark for versatility. Fresh enough for daytime and refined enough for evening.",
+    "consultant": "If you only own one fragrance, this is an excellent place to start.",
+    "keywords": [
+      "versatile",
+      "everyday",
+      "signature",
+      "blue",
+      "office",
+      "date",
+      "wedding"
+    ]
+  },
+  {
+    "id": 4,
+    "brand": "Hermès",
+    "name": "Terre d'Hermès EDT",
+    "family": "Woody Spicy",
+    "editorial": "Earthy citrus with remarkable maturity and confidence.",
+    "consultant": "Ideal for someone who prefers character over loudness.",
+    "keywords": [
+      "woody",
+      "earthy",
+      "mature",
+      "masculine",
+      "orange",
+      "vetiver"
+    ]
+  },
+  {
+    "id": 5,
+    "brand": "Dior",
+    "name": "Dior Homme Original",
+    "family": "Woody Floral Musk",
+    "editorial": "An artistic iris fragrance with timeless sophistication.",
+    "consultant": "Perfect for someone who wants to smell distinctive without being loud.",
+    "keywords": [
+      "creative",
+      "iris",
+      "powdery",
+      "dressy",
+      "smart",
+      "elegant"
     ]
   }
 ]
