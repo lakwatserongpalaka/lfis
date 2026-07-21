@@ -14,86 +14,95 @@
 
 <body>
 
-<main class="container">
+<div class="card">
 
-<section class="hero">
+    <p class="eyebrow">Luxury Fragrance Intelligence System</p>
 
-<span class="eyebrow">
-Luxury Fragrance Intelligence System
-</span>
+    <h1>LFIS</h1>
 
-<h1>
-Welcome to LFIS
-</h1>
+    <h2>Private Fragrance Consultant</h2>
 
-<p class="lead">
+    <p class="hero">
+        Every fragrance tells a story.<br>
+        Let's find the one that tells yours.
+    </p>
 
-Your private fragrance consultation starts here.
+    <div class="divider"></div>
 
-</p>
+    <h3>What are you looking for today?</h3>
 
-<p class="intro">
+    <p class="subtitle">
+        Describe a fragrance, a mood, an occasion,
+        or simply how you'd like to feel.
+    </p>
 
-Finding the right fragrance shouldn't feel overwhelming.
+    <input
+        id="q"
+        type="text"
+        placeholder="e.g. Something that smells like a luxury hotel lobby..."
+    >
 
-Whether you're looking for a signature scent,
-a thoughtful gift,
-or something for a special occasion,
-LFIS helps you discover fragrances through elegant guidance—not endless lists.
+    <button onclick="ask()">
+        Begin Consultation
+    </button>
 
-</p>
+    <div class="quick-search">
 
-<div class="consultation">
+        <span>Popular searches</span>
 
-<label class="label-large">
+        <div class="chips">
 
-What are you looking for today?
+            <button class="chip" onclick="fill('Office fragrance')">
+                Office fragrance
+            </button>
 
-</label>
+            <button class="chip" onclick="fill('Quiet luxury')">
+                Quiet luxury
+            </button>
 
-<textarea
-id="query"
-rows="4"
-placeholder="Describe the fragrance you're looking for...
+            <button class="chip" onclick="fill('Hotel lobby')">
+                Hotel lobby
+            </button>
 
-Examples:
+            <button class="chip" onclick="fill('Fresh and expensive')">
+                Fresh &amp; expensive
+            </button>
 
-• Something clean for the office
-• A warm vanilla for date nights
-• I love hotel lobby scents
-• A fragrance that feels confident but not loud"></textarea>
+            <button class="chip" onclick="fill('Summer vacation')">
+                Summer vacation
+            </button>
 
-<button id="beginConsultation">
+        </div>
 
-Begin Consultation
+    </div>
 
-</button>
+    <div id="out">
+
+        <div class="empty">
+
+            <h3>No consultation yet.</h3>
+
+            <p>
+                Begin by describing the kind of fragrance you're
+                searching for, and LFIS will recommend the closest match
+                from its fragrance library.
+            </p>
+
+        </div>
+
+    </div>
+
+    <footer>
+
+        LFIS v1.0 Alpha<br>
+
+        <span>
+            Editorially independent fragrance recommendations.
+        </span>
+
+    </footer>
 
 </div>
-
-<div class="browse">
-
-<p>
-
-Prefer to browse instead?
-
-</p>
-
-<a href="#" id="browseLibrary">
-
-Explore the Fragrance Library →
-
-</a>
-
-</div>
-
-</section>
-
-<section id="results"></section>
-
-</main>
-
-<script src="app.js"></script>
 
 </body>
 
