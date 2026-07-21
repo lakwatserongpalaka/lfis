@@ -1,0 +1,55 @@
+[
+  {
+    "id": 1,
+    "brand": "Tom Ford",
+    "name": "Neroli Portofino",
+    "family": "Citrus Aromatic",
+    "accords": [
+      "Citrus",
+      "White Floral",
+      "Fresh",
+      "Aromatic"
+    ],
+    "topNotes": [
+      "Bergamot",
+      "Mandarin",
+      "Lemon",
+      "Lavender",
+      "Myrtle",
+      "Rosemary"
+    ],
+    "middleNotes": [
+      "African Orange Flower",
+      "Neroli",
+      "Jasmine",
+      "Pittosporum"
+    ],
+    "baseNotes": [
+      "Amber",
+      "Angelica",
+      "Ambrette"
+    ],
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "occasion": [
+      "Vacation",
+      "Beach",
+      "Resort",
+      "Daytime"
+    ],
+    "personality": "Sophisticated, relaxed and effortlessly luxurious.",
+    "editorial": "Neroli Portofino captures the feeling of stepping onto the Italian Riviera. Bright citrus, aromatic herbs and clean white florals create an atmosphere of understated luxury rather than loud attention.",
+    "consultant": "Perfect when you want to smell fresh, polished and quietly expensive.",
+    "keywords": [
+      "fresh",
+      "citrus",
+      "summer",
+      "luxury",
+      "vacation",
+      "resort",
+      "neroli"
+    ]
+  }
+]
