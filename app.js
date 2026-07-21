@@ -182,58 +182,122 @@ function prepareRecommendation(){
 
 function showRecommendation(){
 
-    results.innerHTML=`
+    results.innerHTML = `
 
-    <section class="detail fade">
+    <section class="detail fade recommendation">
 
         <p class="label">
-        Recommendation
+            I have a recommendation I'd like you to consider
         </p>
 
-        <h2>
-
-        Prada L'Homme
-
+        <h2 class="fragrance-title">
+            Prada L'Homme
         </h2>
 
+        <p class="brand-name">
+            by Prada
+        </p>
+
+        <div class="confidence">
+
+            <span class="confidence-number">94%</span>
+
+            <span class="confidence-label">
+                Editorial Match
+            </span>
+
+        </div>
+
+        <hr>
+
+        <h3>
+            Why I chose this
+        </h3>
+
         <p>
 
-        <strong>Why this fits you</strong>
+            You described wanting something clean,
+            refined,
+            professional,
+            and quietly elegant.
+
+            Prada L'Homme reflects those qualities beautifully through its soft iris,
+            neroli,
+            and clean musks.
+            Rather than demanding attention,
+            it creates the impression of effortless confidence.
 
         </p>
 
+        <h3>
+            You may enjoy this because...
+        </h3>
+
+        <ul class="recommendation-list">
+
+            <li>🌿 Clean and elegant</li>
+
+            <li>💼 Excellent for professional environments</li>
+
+            <li>☀️ Comfortable all year round</li>
+
+            <li>🤍 Refined rather than loud</li>
+
+        </ul>
+
+        <h3>
+            Consultant's Note
+        </h3>
+
+        <blockquote>
+
+            If you're searching for one fragrance that quietly carries you
+            from an important meeting to dinner without ever feeling out of
+            place, this is where I'd begin.
+
+        </blockquote>
+
+        <h3>
+            What this is <em>not</em>
+        </h3>
+
         <p>
 
-        Based on everything you've shared, Prada L'Homme offers the refined,
-        clean and quietly luxurious character that aligns beautifully with your
-        preferences. It feels polished rather than loud, making it especially
-        suited for professional environments while remaining versatile enough
-        for everyday wear.
+            If you're looking for something sweet,
+            playful,
+            or designed to command attention the moment you enter a room,
+            there are better choices than this.
+            Prada L'Homme is intentionally understated.
 
         </p>
 
-        <p>
+        <div class="recommendation-actions">
 
-        <strong>Confidence</strong>
+            <button>
 
-        <br><br>
+                Compare Another
 
-        94% Match
+            </button>
 
-        </p>
+            <button>
 
-        <button onclick="location.reload()">
+                Refine My Preferences
 
-            Start a New Consultation
+            </button>
 
-        </button>
+            <button onclick="location.reload()">
+
+                Start Over
+
+            </button>
+
+        </div>
 
     </section>
 
     `;
 
 }
-
 function showMessage(message){
 
     results.innerHTML=`
