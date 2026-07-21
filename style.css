@@ -312,3 +312,116 @@ button:hover{
     box-shadow:var(--shadow);
 
 }
+/* ==========================================================
+   Recommendation Card
+========================================================== */
+
+.recommendation hr{
+
+    margin:34px 0;
+
+    border:none;
+
+    border-top:1px solid var(--border);
+
+}
+
+.fragrance-title{
+
+    margin-top:8px;
+
+    margin-bottom:6px;
+
+}
+
+.brand-name{
+
+    color:var(--muted);
+
+    margin-bottom:26px;
+
+}
+
+.confidence{
+
+    margin:28px 0;
+
+}
+
+.confidence-number{
+
+    display:block;
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    color:var(--accent);
+
+}
+
+.confidence-label{
+
+    color:var(--muted);
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    font-size:.8rem;
+
+}
+
+.recommendation h3{
+
+    margin-top:34px;
+
+    margin-bottom:14px;
+
+    font-weight:600;
+
+}
+
+.recommendation-list{
+
+    margin-left:22px;
+
+    line-height:2;
+
+}
+
+blockquote{
+
+    margin:20px 0;
+
+    padding:20px 24px;
+
+    border-left:4px solid var(--accent);
+
+    color:var(--muted);
+
+    font-style:italic;
+
+    background:rgba(255,255,255,.03);
+
+}
+
+.recommendation-actions{
+
+    display:flex;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    margin-top:40px;
+
+}
+
+.recommendation-actions button{
+
+    flex:1;
+
+    min-width:180px;
+
+}
