@@ -179,3 +179,28 @@ h1{
 }
 
 }
+.recommendation{
+    margin-top:20px;
+    border:1px solid #e6dfd5;
+    border-radius:14px;
+    padding:28px;
+    background:#fcfbf9;
+}
+
+.recommendation h4{
+    color:#8b7d6b;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.recommendation h2{
+    margin-bottom:8px;
+}
+
+.recommendation hr{
+    margin:20px 0;
+    border:none;
+    border-top:1px solid #ece8e2;
+}
