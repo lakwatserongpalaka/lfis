@@ -74,24 +74,75 @@ const interval = setInterval(()=>{
 },350);
     if(result){
 
-        out.innerHTML = `
-            <div class="recommendation">
+        setTimeout(()=>{
 
-                <h4>Recommended for You</h4>
+clearInterval(interval);
 
-                <h2>${result.name}</h2>
+button.disabled=false;
 
-                <p><strong>${result.brand}</strong></p>
+if(result){
 
-                <p>${result.editorial}</p>
+out.innerHTML=`
 
-                <hr>
+<div class="recommendation">
 
-                <p><em>${result.consultant}</em></p>
+<p class="label">
 
-            </div>
-        `;
+Based on your consultation...
 
+</p>
+
+<h2>${result.name}</h2>
+
+<h3>${result.brand}</h3>
+
+<p><strong>${result.family}</strong></p>
+
+<p class="editorial">
+
+${result.editorial}
+
+</p>
+
+<hr>
+
+<p class="consultant">
+
+${result.consultant}
+
+</p>
+
+</div>
+
+`;
+
+}else{
+
+out.innerHTML=`
+
+<div class="empty">
+
+<h3>
+
+I couldn't find the perfect match just yet.
+
+</h3>
+
+<p>
+
+Try searching for:
+
+office • fresh • woody • luxury • beach • date • executive
+
+</p>
+
+</div>
+
+`;
+
+}
+
+},1400);
     }else{
 
         out.innerHTML = `
