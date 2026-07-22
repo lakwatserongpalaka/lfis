@@ -1,3 +1,4 @@
+console.log("LFIS APP.JS CONNECTED");
 let fragrances = [];
 
 
