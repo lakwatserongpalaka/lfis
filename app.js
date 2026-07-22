@@ -11,9 +11,26 @@ function ask() {
 
     const q = document.getElementById("q").value.toLowerCase();
 
-    const result = fragrances.find(f =>
-        f.keywords.some(k => q.includes(k))
-    );
+    const result = fragrances.find(f => {
+
+    const searchable = [
+
+        f.brand || "",
+        f.name || "",
+        f.family || "",
+
+        ...(f.keywords || []),
+        ...(f.mood || []),
+        ...(f.occasion || []),
+        ...(f.style || [])
+
+    ]
+    .join(" ")
+    .toLowerCase();
+
+    return searchable.includes(q);
+
+});
 
     const out = document.getElementById("out");
 
