@@ -33,7 +33,45 @@ function ask() {
 });
 
     const out = document.getElementById("out");
+const button = document.querySelector("button");
 
+button.disabled = true;
+
+const messages = [
+
+    "Consulting the fragrance library...",
+
+    "Reviewing fragrance profiles...",
+
+    "Finding your closest recommendation...",
+
+    "Preparing your consultation..."
+
+];
+
+let index = 0;
+
+out.innerHTML = `
+<div class="loading">
+${messages[0]}
+</div>
+`;
+
+const interval = setInterval(()=>{
+
+    index++;
+
+    if(index < messages.length){
+
+        out.innerHTML=`
+        <div class="loading">
+        ${messages[index]}
+        </div>
+        `;
+
+    }
+
+},350);
     if(result){
 
         out.innerHTML = `
