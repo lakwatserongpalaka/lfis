@@ -64,7 +64,6 @@ function ask() {
 }
 
 function fill(text){
-
-    document.getElementById("q").value=text;
-
+    document.getElementById("q").value = text;
+    ask();
 }
