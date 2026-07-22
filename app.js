@@ -1,16 +1,15 @@
-console.log("LFIS APP.JS CONNECTED");
 let fragrances = [];
 
 
 /*
-    LFIS FRAGRANCE LIBRARY LOADER
+    LFIS LIBRARY LOADER
 */
 
 fetch("data/fragrances.json")
     .then(response => {
 
         if (!response.ok) {
-            throw new Error("Cannot load fragrance library");
+            throw new Error("Unable to load fragrance library");
         }
 
         return response.json();
@@ -38,6 +37,7 @@ fetch("data/fragrances.json")
 
 
 
+
 /*
     LFIS CONSULTATION ENGINE
 */
@@ -45,7 +45,7 @@ fetch("data/fragrances.json")
 function ask() {
 
 
-    const q = document
+    const input = document
         .getElementById("q")
         .value
         .toLowerCase()
@@ -58,19 +58,19 @@ function ask() {
 
 
 
-    if (!q) {
+    if (!input) {
 
         out.innerHTML = `
 
         <div class="empty">
 
         <h3>
-        Tell me what you are looking for.
+        Tell me what kind of scent you are looking for.
         </h3>
 
         <p>
         Try:
-        fresh • office • woody • luxury • beach • date
+        fresh • woody • office • luxury • date • beach
         </p>
 
         </div>
@@ -91,17 +91,12 @@ function ask() {
         <div class="empty">
 
         <h3>
-        The fragrance library is still loading.
+        Fragrance library is still loading.
         </h3>
-
-        <p>
-        Please wait a moment and try again.
-        </p>
 
         </div>
 
         `;
-
 
         return;
 
@@ -121,7 +116,7 @@ function ask() {
 
         "Analyzing scent personality...",
 
-        "Preparing your recommendation..."
+        "Preparing your consultation..."
 
     ];
 
@@ -143,7 +138,7 @@ function ask() {
 
 
 
-    const interval = setInterval(() => {
+    const interval = setInterval(()=>{
 
 
         index++;
@@ -165,22 +160,51 @@ function ask() {
         }
 
 
-    },350);
+    },400);
 
 
 
 
 
-    const result = fragrances.find(f => {
+    /*
+        LFIS SCORING SYSTEM
+    */
 
 
-        const searchable = [
+    const keywords = input
+        .split(" ")
+        .filter(word => word.length > 0);
 
-            f.brand || "",
 
-            f.name || "",
 
-            f.family || "",
+    const scored = fragrances.map(f => {
+
+
+        let score = 0;
+
+
+
+        const brand =
+            (f.brand || "")
+            .toLowerCase();
+
+
+
+        const name =
+            (f.name || "")
+            .toLowerCase();
+
+
+
+        const family =
+            (f.family || "")
+            .toLowerCase();
+
+
+
+        const allKeywords = [
+
+            ...keywords,
 
             ...(f.keywords || []),
 
@@ -190,17 +214,49 @@ function ask() {
 
             ...(f.style || [])
 
-
         ]
-
-        .join(" ")
-
-        .toLowerCase();
+        .map(x => String(x).toLowerCase());
 
 
 
-        return searchable.includes(q);
 
+
+        keywords.forEach(word => {
+
+
+            if(brand.includes(word)){
+                score += 8;
+            }
+
+
+            if(name.includes(word)){
+                score += 8;
+            }
+
+
+            if(family.includes(word)){
+                score += 6;
+            }
+
+
+            if(allKeywords.some(item =>
+                item.includes(word)
+            )){
+                score += 10;
+            }
+
+
+        });
+
+
+
+        return {
+
+            fragrance:f,
+
+            score:score
+
+        };
 
 
     });
@@ -209,22 +265,32 @@ function ask() {
 
 
 
+    const result = scored
 
-    setTimeout(() => {
+        .filter(item => item.score > 0)
 
+        .sort((a,b)=>
+            b.score - a.score
+        )[0]?.fragrance;
+
+
+
+
+
+
+
+    setTimeout(()=>{
 
 
         clearInterval(interval);
 
 
-
-        button.disabled = false;
-
+        button.disabled=false;
 
 
 
 
-        if(result) {
+        if(result){
 
 
 
@@ -235,37 +301,27 @@ function ask() {
 
 
             <p class="label">
-
             Based on your consultation...
-
             </p>
 
 
 
             <h2>
-
-            ${result.name || "Unknown Fragrance"}
-
+            ${result.name || ""}
             </h2>
 
 
 
             <h3>
-
             ${result.brand || ""}
-
             </h3>
 
 
 
             <p>
-
             <strong>
-
             ${result.family || ""}
-
             </strong>
-
             </p>
 
 
@@ -273,7 +329,7 @@ function ask() {
             <p class="editorial">
 
             ${result.editorial || 
-            "A fragrance selected based on your preferences."}
+            "A fragrance selected based on your scent profile."}
 
             </p>
 
@@ -294,7 +350,6 @@ function ask() {
             </div>
 
 
-
             `;
 
 
@@ -310,33 +365,37 @@ function ask() {
 
 
             <h3>
-
-            I couldn't find the perfect match yet.
-
+            I need a little more scent direction.
             </h3>
 
 
 
             <p>
 
-            Try searching for:
-
+            Try:
             <br><br>
 
-            fresh • citrus • woody • luxury • beach • date • executive • office
+            fresh
+            <br>
+            woody
+            <br>
+            luxury
+            <br>
+            office
+            <br>
+            date night
 
             </p>
 
 
-
             </div>
-
 
 
             `;
 
 
         }
+
 
 
 
@@ -350,7 +409,6 @@ function ask() {
 
 
 
-
 /*
     QUICK SEARCH BUTTONS
 */
@@ -359,8 +417,8 @@ function fill(text){
 
 
     document
-        .getElementById("q")
-        .value = text;
+    .getElementById("q")
+    .value=text;
 
 
     ask();
