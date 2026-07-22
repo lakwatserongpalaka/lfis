@@ -1,181 +1,368 @@
 let fragrances = [];
 
+
+/*
+    LFIS FRAGRANCE LIBRARY LOADER
+*/
+
 fetch("data/fragrances.json")
-  .then(response => response.json())
-  .then(data => {
-    fragrances = data;
-    console.log("LFIS Library Loaded", fragrances);
-  });
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Cannot load fragrance library");
+        }
+
+        return response.json();
+
+    })
+    .then(data => {
+
+        fragrances = data;
+
+        console.log(
+            "LFIS Library Loaded",
+            fragrances.length,
+            "fragrances"
+        );
+
+    })
+    .catch(error => {
+
+        console.error(
+            "LFIS Library Error:",
+            error
+        );
+
+    });
+
+
+
+/*
+    LFIS CONSULTATION ENGINE
+*/
 
 function ask() {
 
-    const q = document.getElementById("q").value.toLowerCase();
+
+    const q = document
+        .getElementById("q")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const out = document.getElementById("out");
+
+    const button = document.querySelector("button");
+
+
+
+    if (!q) {
+
+        out.innerHTML = `
+
+        <div class="empty">
+
+        <h3>
+        Tell me what you are looking for.
+        </h3>
+
+        <p>
+        Try:
+        fresh • office • woody • luxury • beach • date
+        </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    if (fragrances.length === 0) {
+
+
+        out.innerHTML = `
+
+        <div class="empty">
+
+        <h3>
+        The fragrance library is still loading.
+        </h3>
+
+        <p>
+        Please wait a moment and try again.
+        </p>
+
+        </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+    button.disabled = true;
+
+
+
+    const messages = [
+
+        "Consulting the fragrance library...",
+
+        "Reviewing fragrance profiles...",
+
+        "Analyzing scent personality...",
+
+        "Preparing your recommendation..."
+
+    ];
+
+
+
+    let index = 0;
+
+
+
+    out.innerHTML = `
+
+    <div class="loading">
+
+    ${messages[0]}
+
+    </div>
+
+    `;
+
+
+
+    const interval = setInterval(() => {
+
+
+        index++;
+
+
+        if(index < messages.length){
+
+
+            out.innerHTML = `
+
+            <div class="loading">
+
+            ${messages[index]}
+
+            </div>
+
+            `;
+
+        }
+
+
+    },350);
+
+
+
+
 
     const result = fragrances.find(f => {
 
-    const searchable = [
 
-        f.brand || "",
-        f.name || "",
-        f.family || "",
+        const searchable = [
 
-        ...(f.keywords || []),
-        ...(f.mood || []),
-        ...(f.occasion || []),
-        ...(f.style || [])
+            f.brand || "",
 
-    ]
-    .join(" ")
-    .toLowerCase();
+            f.name || "",
 
-    return searchable.includes(q);
+            f.family || "",
 
-});
+            ...(f.keywords || []),
 
-    const out = document.getElementById("out");
-const button = document.querySelector("button");
+            ...(f.mood || []),
 
-button.disabled = true;
+            ...(f.occasion || []),
 
-const messages = [
+            ...(f.style || [])
 
-    "Consulting the fragrance library...",
 
-    "Reviewing fragrance profiles...",
+        ]
 
-    "Finding your closest recommendation...",
+        .join(" ")
 
-    "Preparing your consultation..."
+        .toLowerCase();
 
-];
 
-let index = 0;
 
-out.innerHTML = `
-<div class="loading">
-${messages[0]}
-</div>
-`;
+        return searchable.includes(q);
 
-const interval = setInterval(()=>{
 
-    index++;
 
-    if(index < messages.length){
+    });
 
-        out.innerHTML=`
-        <div class="loading">
-        ${messages[index]}
-        </div>
-        `;
 
-    }
 
-},350);
-    if(result){
 
-        setTimeout(()=>{
 
-clearInterval(interval);
 
-button.disabled=false;
+    setTimeout(() => {
 
-if(result){
 
-out.innerHTML=`
 
-<div class="recommendation">
+        clearInterval(interval);
 
-<p class="label">
 
-Based on your consultation...
 
-</p>
+        button.disabled = false;
 
-<h2>${result.name}</h2>
 
-<h3>${result.brand}</h3>
 
-<p><strong>${result.family}</strong></p>
 
-<p class="editorial">
 
-${result.editorial}
+        if(result) {
 
-</p>
 
-<hr>
 
-<p class="consultant">
+            out.innerHTML = `
 
-${result.consultant}
 
-</p>
+            <div class="recommendation">
 
-</div>
 
-`;
+            <p class="label">
 
-}else{
+            Based on your consultation...
 
-out.innerHTML=`
+            </p>
 
-<div class="empty">
 
-<h3>
 
-I couldn't find the perfect match just yet.
+            <h2>
 
-</h3>
+            ${result.name || "Unknown Fragrance"}
 
-<p>
+            </h2>
 
-Try searching for:
 
-office • fresh • woody • luxury • beach • date • executive
 
-</p>
+            <h3>
 
-</div>
+            ${result.brand || ""}
 
-`;
+            </h3>
+
+
+
+            <p>
+
+            <strong>
+
+            ${result.family || ""}
+
+            </strong>
+
+            </p>
+
+
+
+            <p class="editorial">
+
+            ${result.editorial || 
+            "A fragrance selected based on your preferences."}
+
+            </p>
+
+
+
+            <hr>
+
+
+
+            <p class="consultant">
+
+            ${result.consultant || ""}
+
+            </p>
+
+
+
+            </div>
+
+
+
+            `;
+
+
+
+        } else {
+
+
+
+            out.innerHTML = `
+
+
+            <div class="empty">
+
+
+            <h3>
+
+            I couldn't find the perfect match yet.
+
+            </h3>
+
+
+
+            <p>
+
+            Try searching for:
+
+            <br><br>
+
+            fresh • citrus • woody • luxury • beach • date • executive • office
+
+            </p>
+
+
+
+            </div>
+
+
+
+            `;
+
+
+        }
+
+
+
+    },1400);
+
+
 
 }
 
-},1400);
-    }else{
 
-        out.innerHTML = `
-<div class="recommendation">
 
-    <p class="label">
-        Based on your consultation, I recommend
-    </p>
 
-    <h2>${result.name}</h2>
 
-    <h3>${result.brand}</h3>
 
-    <p><strong>${result.family}</strong></p>
-
-    <p class="editorial">
-        ${result.editorial}
-    </p>
-
-    <hr>
-
-    <p class="consultant">
-        ${result.consultant}
-    </p>
-
-</div>
-`;
-
-    }
-
-}
+/*
+    QUICK SEARCH BUTTONS
+*/
 
 function fill(text){
-    document.getElementById("q").value = text;
+
+
+    document
+        .getElementById("q")
+        .value = text;
+
+
     ask();
+
+
 }
