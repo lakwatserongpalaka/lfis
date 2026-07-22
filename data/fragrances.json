@@ -1,87 +1,83 @@
 [
   {
-    "id": 1,
-    "brand": "Tom Ford",
-    "name": "Neroli Portofino",
-    "family": "Citrus Aromatic",
-    "editorial": "Neroli Portofino captures the feeling of stepping onto the Italian Riviera. Bright citrus, aromatic herbs and clean white florals create an atmosphere of understated luxury.",
-    "consultant": "Perfect when you want to smell fresh, polished and quietly expensive.",
-    "keywords": [
-      "fresh",
-      "citrus",
-      "summer",
-      "vacation",
-      "resort",
-      "luxury",
-      "hotel lobby",
-      "beach"
-    ]
-  },
-  {
-    "id": 2,
-    "brand": "Prada",
-    "name": "Prada L'Homme",
-    "family": "Woody Floral Musk",
-    "editorial": "Prada L'Homme is a masterclass in understated elegance. Clean, refined and effortlessly professional.",
-    "consultant": "One of the safest recommendations for office and everyday elegance.",
-    "keywords": [
-      "office",
-      "professional",
-      "clean",
-      "executive",
-      "hotel lobby",
-      "signature",
-      "fresh",
-      "elegant"
-    ]
-  },
-  {
-    "id": 3,
+    "id": 39,
     "brand": "Chanel",
     "name": "Bleu de Chanel EDT",
     "family": "Woody Aromatic",
-    "editorial": "The benchmark for versatility. Fresh enough for daytime and refined enough for evening.",
-    "consultant": "If you only own one fragrance, this is an excellent place to start.",
+    "personality": "Confident, Modern Gentleman",
+    "mood": ["confident", "fresh", "professional", "refined"],
+    "occasion": ["office", "date", "wedding", "everyday"],
+    "style": ["quiet luxury", "executive", "signature scent"],
+    "editorial": "If confidence had a scent, it would begin here. Bleu de Chanel EDT is crisp, refined, and endlessly versatile. Bright citrus opens into aromatic woods that feel equally at home in a boardroom, a wedding, or a weekend dinner.",
+    "consultant": "An exceptional first luxury fragrance. If you only own one bottle, this remains one of the safest recommendations.",
     "keywords": [
-      "versatile",
-      "everyday",
-      "signature",
-      "blue",
-      "office",
-      "date",
-      "wedding"
+      "bleu","chanel","edt","fresh","office","executive","professional",
+      "luxury","signature","blue fragrance","wedding","hotel lobby",
+      "modern","versatile","citrus","woody"
     ]
   },
   {
-    "id": 4,
-    "brand": "Hermès",
-    "name": "Terre d'Hermès EDT",
-    "family": "Woody Spicy",
-    "editorial": "Earthy citrus with remarkable maturity and confidence.",
-    "consultant": "Ideal for someone who prefers character over loudness.",
+    "id": 40,
+    "brand": "Chanel",
+    "name": "Bleu de Chanel EDP",
+    "family": "Woody Aromatic",
+    "personality": "Elegant, Sophisticated, Confident",
+    "mood": ["confident","refined","luxurious","professional"],
+    "occasion": ["office","formal","date","signature"],
+    "style": ["modern gentleman","executive","luxury"],
+    "editorial": "A richer interpretation of Bleu de Chanel. The freshness remains while warm woods and incense provide greater depth for both day and evening wear.",
+    "consultant": "Perfect if you want one fragrance that moves effortlessly from the boardroom to an elegant dinner.",
     "keywords": [
-      "woody",
-      "earthy",
-      "mature",
-      "masculine",
-      "orange",
-      "vetiver"
+      "bleu","chanel","edp","executive","signature","office",
+      "formal","luxury","fresh","woody","incense"
     ]
   },
   {
-    "id": 5,
-    "brand": "Dior",
-    "name": "Dior Homme Original",
+    "id": 48,
+    "brand": "Dolce & Gabbana",
+    "name": "Light Blue",
+    "family": "Citrus Floral",
+    "personality": "Bright, Cheerful, Relaxed",
+    "mood": ["vacation","happy","fresh","carefree"],
+    "occasion": ["summer","beach","daily","travel"],
+    "style": ["Mediterranean","casual"],
+    "editorial": "Fresh citrus, crisp apple and delicate florals evoke a carefree Mediterranean summer. Bright, effortless and uplifting.",
+    "consultant": "One of the easiest fragrances to recommend for hot weather.",
+    "keywords": [
+      "light blue","summer","beach","vacation","fresh",
+      "citrus","travel","hot weather"
+    ]
+  },
+  {
+    "id": 66,
+    "brand": "Carolina Herrera",
+    "name": "212 Men",
     "family": "Woody Floral Musk",
-    "editorial": "An artistic iris fragrance with timeless sophistication.",
-    "consultant": "Perfect for someone who wants to smell distinctive without being loud.",
+    "personality": "Urban, Energetic, Approachable",
+    "mood": ["fresh","energetic","casual","confident"],
+    "occasion": ["office","daily","casual","weekend"],
+    "style": ["city","modern","clean"],
+    "editorial": "212 Men captures the energy of city life with fresh citrus, green notes and smooth woods that create an effortless everyday signature.",
+    "consultant": "Excellent if you enjoy clean, modern fragrances that never feel overdone.",
     "keywords": [
-      "creative",
-      "iris",
-      "powdery",
-      "dressy",
-      "smart",
-      "elegant"
+      "212","carolina herrera","city","office","fresh",
+      "clean","daily","modern","urban"
+    ]
+  },
+  {
+    "id": 120,
+    "brand": "Dior",
+    "name": "Sauvage EDT",
+    "family": "Aromatic Fougère",
+    "personality": "Bold, Charismatic, Modern",
+    "mood": ["confident","bold","fresh"],
+    "occasion": ["date","night","everyday","weekend"],
+    "style": ["modern","mass appealing"],
+    "editorial": "Bright bergamot and ambroxan create one of the most recognizable masculine fragrances of the modern era. Fresh, powerful and unmistakably confident.",
+    "consultant": "If compliments matter, Sauvage continues to be one of the strongest performers.",
+    "keywords": [
+      "sauvage","dior","blue","compliments",
+      "fresh","date","night","bergamot"
     ]
   }
 ]
