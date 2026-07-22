@@ -56,25 +56,31 @@ function ask() {
 
     }else{
 
-        out.innerHTML=`
-            <div class="empty">
+        out.innerHTML = `
+<div class="recommendation">
 
-                <h3>No recommendation yet.</h3>
+    <p class="label">
+        Based on your consultation, I recommend
+    </p>
 
-                <p>
-                    I'm still learning.
-                    Try words like:
-                    office,
-                    fresh,
-                    woody,
-                    elegant,
-                    versatile,
-                    hotel lobby,
-                    vacation.
-                </p>
+    <h2>${result.name}</h2>
 
-            </div>
-        `;
+    <h3>${result.brand}</h3>
+
+    <p><strong>${result.family}</strong></p>
+
+    <p class="editorial">
+        ${result.editorial}
+    </p>
+
+    <hr>
+
+    <p class="consultant">
+        ${result.consultant}
+    </p>
+
+</div>
+`;
 
     }
 
