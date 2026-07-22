@@ -204,3 +204,63 @@ h1{
     border:none;
     border-top:1px solid #ece8e2;
 }
+/* ---------- LFIS Consultation Animation ---------- */
+
+.recommendation,
+.empty {
+
+    opacity: 0;
+    transform: translateY(12px);
+
+    animation: fadeCard .8s ease forwards;
+
+}
+
+@keyframes fadeCard{
+
+    from{
+
+        opacity:0;
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+.loading{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#777;
+
+    font-style:italic;
+
+    animation:pulse 1.2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{opacity:.35;}
+
+    50%{opacity:1;}
+
+    100%{opacity:.35;}
+
+}
+
+button:disabled{
+
+    opacity:.6;
+    cursor:not-allowed;
+
+}
