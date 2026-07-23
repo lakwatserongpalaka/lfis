@@ -16,113 +16,372 @@
 
 <div class="card">
 
-    <p class="eyebrow">Luxury Fragrance Intelligence System</p>
+    <p class="eyebrow">
+        Luxury Fragrance Intelligence System
+    </p>
 
     <h1>LFIS</h1>
 
-    <h2>Private Fragrance Consultant</h2>
+    <h2>
+        Private Fragrance Consultant
+    </h2>
 
     <p class="hero">
+
         Every fragrance tells a story.<br>
+
         Let's find the one that tells yours.
+
     </p>
 
     <div class="divider"></div>
 
-    <h3>What are you looking for today?</h3>
+    <h3>
 
-<p class="subtitle">
-    Describe a fragrance, a mood, an occasion,
-    or simply how you'd like to feel.
-</p>
+        What are you looking for today?
 
-<div class="gender-filter">
+    </h3>
 
-    <label>
-        <input type="checkbox" id="male">
-        Male
-    </label>
+    <p class="subtitle">
 
-    <label>
-        <input type="checkbox" id="female">
-        Female
-    </label>
+        Describe a fragrance,
+        a mood,
+        an occasion,
+        or simply how you'd like to feel.
 
-    <label>
-        <input type="checkbox" id="unisex">
-        Unisex
-    </label>
+    </p>
 
-</div>
 
-<input
-    id="q"
-    type="text"
-    placeholder="e.g. Something that smells like a luxury hotel lobby..."
->
+
+    <!-- ===================================== -->
+    <!-- CONSULTATION PREFERENCES -->
+    <!-- ===================================== -->
+
+    <div class="preferences">
+
+        <h4>
+
+            Consultation Preferences
+
+        </h4>
+
+        <!-- Gender -->
+
+        <div class="filter-group">
+
+            <span class="filter-label">
+
+                Gender
+
+            </span>
+
+            <div class="filter-pills">
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        id="all"
+                        checked>
+
+                    <span>All</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        id="male">
+
+                    <span>Male</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        id="female">
+
+                    <span>Female</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        id="unisex">
+
+                    <span>Unisex</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Season -->
+
+        <div class="filter-group">
+
+            <span class="filter-label">
+
+                Season
+
+            </span>
+
+            <div class="filter-pills">
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="season"
+                        id="season-any"
+                        checked>
+
+                    <span>Any</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="season"
+                        id="summer">
+
+                    <span>Summer</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="season"
+                        id="spring">
+
+                    <span>Spring</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="season"
+                        id="autumn">
+
+                    <span>Autumn</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="season"
+                        id="winter">
+
+                    <span>Winter</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Performance -->
+
+        <div class="filter-group">
+
+            <span class="filter-label">
+
+                Performance
+
+            </span>
+
+            <div class="filter-pills">
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="performance"
+                        id="performance-any"
+                        checked>
+
+                    <span>Any</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="performance"
+                        id="soft">
+
+                    <span>Soft</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="performance"
+                        id="moderate">
+
+                    <span>Moderate</span>
+
+                </label>
+
+                <label class="pill">
+
+                    <input
+                        type="radio"
+                        name="performance"
+                        id="strong">
+
+                    <span>Strong</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SEARCH -->
+
+    <input
+
+        id="q"
+
+        type="text"
+
+        placeholder="e.g. Something that smells like a luxury hotel lobby..."
+
+    >
+
+
 
     <button onclick="ask()">
+
         Begin Consultation
+
     </button>
+
+
 
     <div class="quick-search">
 
-        <span>Popular searches</span>
+        <span>
+
+            Popular consultations
+
+        </span>
 
         <div class="chips">
 
-            <button class="chip" onclick="fill('Office fragrance')">
+            <button class="chip"
+                onclick="fill('Office fragrance')">
+
                 Office fragrance
+
             </button>
 
-            <button class="chip" onclick="fill('Quiet luxury')">
+            <button class="chip"
+                onclick="fill('Quiet luxury')">
+
                 Quiet luxury
+
             </button>
 
-            <button class="chip" onclick="fill('Hotel lobby')">
+            <button class="chip"
+                onclick="fill('Hotel lobby')">
+
                 Hotel lobby
+
             </button>
 
-            <button class="chip" onclick="fill('Fresh and expensive')">
-                Fresh &amp; expensive
+            <button class="chip"
+                onclick="fill('Fresh and expensive')">
+
+                Fresh &amp; Expensive
+
             </button>
 
-            <button class="chip" onclick="fill('Summer vacation')">
-                Summer vacation
+            <button class="chip"
+                onclick="fill('Summer vacation')">
+
+                Summer Vacation
+
             </button>
 
         </div>
 
     </div>
 
+
+
     <div id="out">
 
         <div class="empty">
 
-            <h3>No consultation yet.</h3>
+            <h3>
+
+                No consultation yet.
+
+            </h3>
 
             <p>
-                Begin by describing the kind of fragrance you're
-                searching for, and LFIS will recommend the closest match
-                from its fragrance library.
+
+                Begin by describing the fragrance you're searching for,
+                and LFIS will recommend the closest match from its growing
+                fragrance intelligence library.
+
             </p>
 
         </div>
 
     </div>
 
+
+
     <footer>
 
-        LFIS v1.0 Alpha<br>
+        LFIS v2.0 Alpha
+
+        <br>
 
         <span>
+
             Editorially independent fragrance recommendations.
+
         </span>
 
     </footer>
 
 </div>
+
 <script src="app.js"></script>
+
 </body>
 
 </html>
