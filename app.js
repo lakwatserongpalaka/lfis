@@ -429,21 +429,32 @@ const words = input
 
 
 
-        <p>
+<p><strong>Why LFIS chose this fragrance</strong></p>
 
-        <strong>Why LFIS chose this fragrance</strong>
+<ul>
 
-        </p>
+${
+(best.occasion || [])
+    .slice(0,2)
+    .map(item => `<li>Excellent for ${item}.</li>`)
+    .join("")
+}
 
-        <ul>
+${
+(best.style || [])
+    .slice(0,2)
+    .map(item => `<li>Matches a ${item} style.</li>`)
+    .join("")
+}
 
-        <li>Matches your search keywords.</li>
+${
+(best.mood || [])
+    .slice(0,2)
+    .map(item => `<li>Ideal if you're looking for a ${item} mood.</li>`)
+    .join("")
+}
 
-        <li>Fits the requested mood and occasion.</li>
-
-        <li>High recommendation score.</li>
-
-        </ul>
+</ul>
 
         ${
         top3.length>1?
