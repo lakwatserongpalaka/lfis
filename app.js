@@ -1,17 +1,16 @@
+/*
+==========================================
+LFIS v2.0
+Luxury Fragrance Intelligence System
+==========================================
+*/
+
 let fragrances = [];
 
 /*
-=====================================================
-LFIS v2.0
-Luxury Fragrance Intelligence System
-=====================================================
-*/
-
-
-/*
-=====================================================
-LIBRARY LOADER
-=====================================================
+==========================================
+LFIS LIBRARY LOADER
+==========================================
 */
 
 fetch("data/fragrances.json")
@@ -20,7 +19,7 @@ fetch("data/fragrances.json")
 
     if(!response.ok){
 
-        throw new Error("Unable to load LFIS Library");
+        throw new Error("Unable to load fragrance library.");
 
     }
 
@@ -34,7 +33,7 @@ fetch("data/fragrances.json")
 
     console.log(
 
-        "LFIS Library Loaded",
+        "LFIS Library Loaded:",
 
         fragrances.length,
 
@@ -46,40 +45,118 @@ fetch("data/fragrances.json")
 
 .catch(error=>{
 
-    console.error(error);
+    console.error(
+
+        "LFIS Error:",
+
+        error
+
+    );
 
 });
 
 
+
 /*
-=====================================================
+==========================================
+LFIS SYNONYM ENGINE
+==========================================
+*/
+
+const synonymMap={
+
+    corporate:"office",
+    work:"office",
+    working:"office",
+    business:"office",
+    boardroom:"office",
+
+    classy:"luxury",
+    luxurious:"luxury",
+    premium:"luxury",
+    expensive:"luxury",
+    elegant:"luxury",
+
+    ceo:"executive",
+    boss:"executive",
+    manager:"executive",
+
+    sexy:"date",
+    romantic:"date",
+    dinner:"date",
+
+    beach:"vacation",
+    island:"vacation",
+    tropical:"vacation",
+    holiday:"vacation",
+
+    crisp:"fresh",
+    clean:"fresh",
+
+    masculine:"male",
+    feminine:"female",
+
+    hotel:"hotel lobby",
+    lobby:"hotel lobby"
+};
+
+
+
+/*
+==========================================
+LFIS FILTER HELPERS
+==========================================
+*/
+
+function getSelectedGender(){
+
+    const checked=document.querySelector(
+
+        'input[name="gender"]:checked'
+
+    );
+
+    return checked ? checked.value : "all";
+
+}
+
+
+
+function getSelectedSeason(){
+
+    const select=document.getElementById("season");
+
+    return select ? select.value : "season-any";
+
+}
+
+
+
+function getSelectedPerformance(){
+
+    const select=document.getElementById("performance");
+
+    return select ? select.value : "performance-any";
+
+}
+/*
+==========================================
 LFIS CONSULTATION ENGINE
-=====================================================
+==========================================
 */
 
 function ask(){
 
-
     const input=document
-
-    .getElementById("q")
-
-    .value
-
-    .toLowerCase()
-
-    .trim();
-
-
+        .getElementById("q")
+        .value
+        .trim()
+        .toLowerCase();
 
     const out=document.getElementById("out");
 
-
-
     const button=document.querySelector(
-
         "button:not(.chip)"
-
     );
 
 
@@ -90,31 +167,31 @@ function ask(){
 
         <div class="empty">
 
-            <h3>
-
-                Tell me what you're looking for.
-
-            </h3>
+            <h3>Tell me what you're looking for.</h3>
 
             <p>
 
-                Try things like...
+                Examples
 
                 <br><br>
 
-                luxury office
+                Quiet luxury
 
                 <br>
 
-                beach vacation
+                Office fragrance
 
                 <br>
 
-                quiet luxury
+                Summer vacation
 
                 <br>
 
-                date night
+                Date night
+
+                <br>
+
+                Fresh and expensive
 
             </p>
 
@@ -134,7 +211,7 @@ function ask(){
 
         <div class="loading">
 
-        Loading LFIS Library...
+            Loading LFIS Library...
 
         </div>
 
@@ -150,13 +227,23 @@ function ask(){
 
 
 
+    const gender=getSelectedGender();
+
+    const season=getSelectedSeason();
+
+    const performance=getSelectedPerformance();
+
+
+
     const loading=[
 
-        "Consulting the fragrance library...",
+        "Consulting the LFIS fragrance library...",
 
-        "Reviewing fragrance personalities...",
+        "Analyzing fragrance personality...",
 
-        "Analyzing scent preferences...",
+        "Comparing scent intelligence...",
+
+        "Calculating recommendation score...",
 
         "Preparing your consultation..."
 
@@ -164,7 +251,7 @@ function ask(){
 
 
 
-    let loadingIndex=0;
+    let step=0;
 
 
 
@@ -182,244 +269,15 @@ function ask(){
 
     const timer=setInterval(()=>{
 
-        loadingIndex++;
+        step++;
 
-        if(loadingIndex<loading.length){
+        if(step<loading.length){
 
             out.innerHTML=`
 
             <div class="loading">
 
-                ${loading[loadingIndex]}
-
-            </div>
-
-            `;
-
-        }
-
-    },450);
-
-
-
-/*
-=====================================================
-CONSULTATION PREFERENCES
-=====================================================
-*/
-
-const selectedGender=document.querySelector(
-
-'input[name="gender"]:checked'
-
-).id;
-
-
-
-const selectedSeason=document.querySelector(
-
-'input[name="season"]:checked'
-
-).id;
-
-
-
-const selectedPerformance=document.querySelector(
-
-'input[name="performance"]:checked'
-
-).id;
-
-
-
-/*
-=====================================================
-SYNONYM ENGINE
-=====================================================
-*/
-
-const synonymMap={
-
-office:"office",
-
-corporate:"office",
-
-work:"office",
-
-meeting:"office",
-
-business:"office",
-
-executive:"executive",
-
-ceo:"executive",
-
-boss:"executive",
-
-manager:"executive",
-
-expensive:"luxury",
-
-classy:"luxury",
-
-premium:"luxury",
-
-elegant:"luxury",
-
-hotel:"hotel lobby",
-
-lobby:"hotel lobby",
-
-beach:"vacation",
-
-tropical:"vacation",
-
-island:"vacation",
-
-holiday:"vacation",
-
-summer:"summer",
-
-winter:"winter",
-
-autumn:"autumn",
-
-fall:"autumn",
-
-spring:"spring",
-
-romantic:"date",
-
-date:"date",
-
-dinner:"date",
-
-fresh:"fresh",
-
-clean:"fresh",
-
-crisp:"fresh"
-
-};
-
-
-
-const words=input
-
-.split(/\s+/)
-
-.filter(Boolean)
-
-.map(word=>synonymMap[word]||word);
-    function ask(){
-
-    const input=document
-        .getElementById("q")
-        .value
-        .toLowerCase()
-        .trim();
-
-    const out=document.getElementById("out");
-
-    const button=document.querySelector("button");
-
-
-
-    if(input===""){
-
-        out.innerHTML=`
-
-        <div class="empty">
-
-        <h3>Tell me what you're looking for.</h3>
-
-        <p>
-
-        Examples:
-
-        fresh luxury office
-
-        woody date
-
-        beach vacation
-
-        executive
-
-        </p>
-
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    if(fragrances.length===0){
-
-        out.innerHTML=`
-
-        <div class="loading">
-
-        Loading LFIS Library...
-
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    button.disabled=true;
-
-
-
-    const loading=[
-
-        "Consulting the fragrance library...",
-
-        "Analyzing fragrance personality...",
-
-        "Comparing scent profiles...",
-
-        "Preparing recommendation..."
-
-    ];
-
-
-
-    let i=0;
-
-
-
-    out.innerHTML=`
-
-    <div class="loading">
-
-    ${loading[0]}
-
-    </div>
-
-    `;
-
-
-
-    const timer=setInterval(()=>{
-
-        i++;
-
-        if(i<loading.length){
-
-            out.innerHTML=`
-
-            <div class="loading">
-
-            ${loading[i]}
+                ${loading[step]}
 
             </div>
 
@@ -431,185 +289,36 @@ const words=input
 
 
 
+    const words=input
 
+        .split(/\s+/)
 
-    /*
+        .filter(word=>word.length)
+
+        .map(word=>synonymMap[word]||word);
+        /*
     ==========================================
     LFIS MATCH ENGINE
     ==========================================
     */
 
-    /*
-==========================================
-LFIS SYNONYM ENGINE
-==========================================
-*/
-
-const synonymMap = {
-
-    corporate: "office",
-    work: "office",
-    working: "office",
-    business: "office",
-    boardroom: "office",
-
-    classy: "luxury",
-    expensive: "luxury",
-    premium: "luxury",
-    elegant: "luxury",
-
-    ceo: "executive",
-    boss: "executive",
-    manager: "executive",
-
-    sexy: "date",
-    romantic: "date",
-    dinner: "date",
-
-    beach: "vacation",
-    tropical: "vacation",
-    island: "vacation",
-    holiday: "vacation",
-
-    clean: "fresh",
-    crisp: "fresh",
-
-    masculine: "men",
-    feminine: "women"
-};
-
-const words = input
-    .split(/\s+/)
-    .filter(word => word.length > 0)
-    .map(word => synonymMap[word] || word);
-
-
-
-   const results = fragrances.map(f=>{
-
-    let score = 0;
-
-    const searchable=[
-
-        f.brand,
-
-        f.name,
-
-        f.family,
-
-        f.personality,
-
-        ...(f.keywords||[]),
-
-        ...(f.mood||[]),
-
-        ...(f.occasion||[]),
-
-        ...(f.style||[]),
-
-        ...(f.searchKeywords||[])
-
-    ]
-
-    .join(" ")
-
-    .toLowerCase();
-
-
-
-    /*
-    ==========================
-    Keyword Matching
-    ==========================
-    */
-
-    words.forEach(word=>{
-
-        if(searchable.includes(word)){
-
-            score += 12;
-
-        }
-
-    });
-
-
-
-    /*
-    ==========================
-    Brand Bonus
-    ==========================
-    */
-
-    if(
-
-        input.includes((f.brand||"").toLowerCase())
-
-    ){
-
-        score += 40;
-
-    }
-
-
-
-    /*
-    ==========================
-    Exact Name Bonus
-    ==========================
-    */
-
-    if(
-
-        input.includes((f.name||"").toLowerCase())
-
-    ){
-
-        score += 80;
-
-    }
-
-
-
-    /*
-    ==========================
-    Gender Filter
-    ==========================
-    */
-
-    const gender=(f.gender||"unisex").toLowerCase();
-
-    if(
-
-        selectedGender!="all"
-
-        &&
-
-        gender!=selectedGender
-
-    ){
-
-        score=-999;
-
-    }
-
-
-
-    /*
-    ==========================
-    Season Filter
-    ==========================
-    */
-
-    if(
-
-        selectedSeason!="season-any"
-
-    ){
-
-        const season=
-
-        (f.season||[])
+    const results = fragrances.map(f=>{
+
+        let score = 0;
+
+        const searchable=[
+
+            f.brand || "",
+            f.name || "",
+            f.family || "",
+            f.personality || "",
+            ...(f.keywords || []),
+            ...(f.searchKeywords || []),
+            ...(f.mood || []),
+            ...(f.occasion || []),
+            ...(f.style || [])
+
+        ]
 
         .join(" ")
 
@@ -617,178 +326,224 @@ const words = input
 
 
 
+        /* -------------------------
+           Keyword Matching
+        ------------------------- */
+
+        words.forEach(word=>{
+
+            if(searchable.includes(word)){
+
+                score += 10;
+
+            }
+
+        });
+
+
+
+        /* -------------------------
+           Recommendation Score Bonus
+        ------------------------- */
+
+        if(f.recommendationScore){
+
+            score += f.recommendationScore / 10;
+
+        }
+
+
+
+        /* -------------------------
+           Gender Filter
+        ------------------------- */
+
+        const fragranceGender=(
+
+            f.gender || "unisex"
+
+        ).toLowerCase();
+
+
+
         if(
 
-            !season.includes(
+            gender !== "all" &&
 
-                selectedSeason
+            fragranceGender !== "unisex" &&
+
+            fragranceGender !== gender
+
+        ){
+
+            score -= 100;
+
+        }
+
+
+
+        /* -------------------------
+           Season Filter
+        ------------------------- */
+
+        if(
+
+            season !== "season-any"
+
+        ){
+
+            const seasons=(
+
+                f.season || []
+
+            ).map(s=>s.toLowerCase());
+
+
+
+            if(
+
+                seasons.includes(
+
+                    season.toLowerCase()
+
+                )
+
+            ){
+
+                score += 15;
+
+            }
+
+        }
+
+
+
+        /* -------------------------
+           Performance Filter
+        ------------------------- */
+
+        if(
+
+            performance !== "performance-any"
+
+        ){
+
+            if(
+
+                (f.performance || "")
+
+                .toLowerCase()
+
+                ===
+
+                performance.toLowerCase()
+
+            ){
+
+                score += 15;
+
+            }
+
+        }
+
+
+
+        return{
+
+            fragrance:f,
+
+            score:score
+
+        };
+
+    });
+
+
+
+    const top3 = results
+
+        .filter(item=>item.score>0)
+
+        .sort((a,b)=>b.score-a.score)
+
+        .slice(0,3);
+        setTimeout(()=>{
+
+        clearInterval(timer);
+
+        button.disabled = false;
+
+
+
+        if(top3.length===0){
+
+            out.innerHTML=`
+
+            <div class="empty">
+
+                <h3>No perfect match found.</h3>
+
+                <p>
+
+                    Try searching by:
+
+                    <br><br>
+
+                    • Office
+
+                    <br>
+
+                    • Quiet Luxury
+
+                    <br>
+
+                    • Summer
+
+                    <br>
+
+                    • Fresh
+
+                    <br>
+
+                    • Date Night
+
+                    <br>
+
+                    • Bleu de Chanel
+
+                </p>
+
+            </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        const best = top3[0].fragrance;
+
+
+
+        const percent = Math.max(
+
+            72,
+
+            Math.min(
+
+                99,
+
+                Math.round(top3[0].score * 2.5)
 
             )
 
-        ){
+        );
 
-            score-=35;
 
-        }
 
-    }
-
-
-
-    /*
-    ==========================
-    Performance Filter
-    ==========================
-    */
-
-    if(
-
-        selectedPerformance!="performance-any"
-
-    ){
-
-        if(
-
-            (f.performance||"")
-
-            .toLowerCase()
-
-            !=
-
-            selectedPerformance
-
-        ){
-
-            score-=25;
-
-        }
-
-    }
-
-
-
-    /*
-    ==========================
-    LFIS Recommendation Bonus
-    ==========================
-    */
-
-    if(
-
-        f.recommendationScore
-
-    ){
-
-        score +=
-
-        f.recommendationScore/4;
-
-    }
-
-
-
-    return{
-
-        fragrance:f,
-
-        score
-
-    };
-
-});
-
-
-
-const top3=results
-
-.filter(x=>x.score>0)
-
-.sort((a,b)=>b.score-a.score)
-
-.slice(0,3);
-    setTimeout(()=>{
-
-    clearInterval(timer);
-
-    button.disabled=false;
-
-
-
-    if(top3.length===0){
-
-        out.innerHTML=`
-
-        <div class="empty">
-
-            <h3>No perfect match found.</h3>
-
-            <p>
-
-                Try describing a mood,
-
-                occasion,
-
-                fragrance family,
-
-                or brand.
-
-                <br><br>
-
-                Examples:
-
-                <br>
-
-                quiet luxury
-
-                <br>
-
-                office
-
-                <br>
-
-                summer
-
-                <br>
-
-                woody
-
-                <br>
-
-                Bleu de Chanel
-
-            </p>
-
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    const best=top3[0].fragrance;
-
-
-
-    const percent = Math.max(
-
-    72,
-
-    Math.min(
-
-        99,
-
-        Math.round(top3[0].score*2.5)
-
-    )
-
-);
-
-
-
-    out.innerHTML=`
+        out.innerHTML = `
 
 <div class="recommendation fade-in">
 
@@ -806,23 +561,25 @@ LFIS RECOMMENDATION
 
 <h3>${best.brand}</h3>
 
-</div>
-
-<div class="match-circle">
-
-${percent}<span>%</span>
-
-</div>
-
-</div>
-
-
-
 <p class="family">
 
 ${best.family || ""}
 
 </p>
+
+</div>
+
+
+
+<div class="match-circle">
+
+${percent}
+
+<span>%</span>
+
+</div>
+
+</div>
 
 
 
@@ -832,7 +589,9 @@ ${best.family || ""}
 
 <div class="bar">
 
-<div class="fill"
+<div
+
+class="fill"
 
 style="width:${percent}%">
 
@@ -856,7 +615,7 @@ Based on your consultation for
 
 <strong>"${input}"</strong>,
 
-LFIS analyzed fragrance personality,
+LFIS analyzed your preferred
 
 mood,
 
@@ -864,9 +623,9 @@ occasion,
 
 style,
 
-and editorial characteristics
+and fragrance personality
 
-to recommend the closest match.
+to identify the closest luxury fragrance.
 
 </p>
 
@@ -880,9 +639,7 @@ to recommend the closest match.
 
 <p>
 
-${best.personality ||
-
-"Modern, versatile and refined."}
+${best.personality || "Modern, versatile and refined."}
 
 </p>
 
@@ -896,7 +653,7 @@ ${best.personality ||
 
 <p>
 
-${(best.occasion||[]).join(" • ")}
+${(best.occasion || []).join(" • ")}
 
 </p>
 
@@ -910,7 +667,7 @@ ${(best.occasion||[]).join(" • ")}
 
 <p>
 
-${(best.mood||[]).join(" • ")}
+${(best.mood || []).join(" • ")}
 
 </p>
 
@@ -924,7 +681,7 @@ ${(best.mood||[]).join(" • ")}
 
 <p>
 
-${(best.style||[]).join(" • ")}
+${(best.style || []).join(" • ")}
 
 </p>
 
@@ -938,7 +695,7 @@ ${(best.style||[]).join(" • ")}
 
 <p class="editorial">
 
-${best.editorial}
+${best.editorial || ""}
 
 </p>
 
@@ -952,15 +709,14 @@ ${best.editorial}
 
 <p class="consultant">
 
-${best.consultant}
+${best.consultant || ""}
 
 </p>
-
-
-
 ${
 
-best.recommendationScore ?
+best.recommendationScore
+
+?
 
 `
 
@@ -976,15 +732,23 @@ best.recommendationScore ?
 
 `
 
-: ""
+:
+
+""
 
 }
 
 
 
+${
+
+top3.length>1
+
+?
+
+`
+
 <hr>
-
-
 
 <h4>You May Also Like</h4>
 
@@ -994,25 +758,25 @@ ${top3.slice(1).map(item=>`
 
 <li>
 
-<strong>
-
-${item.fragrance.name}
-
-</strong>
+<strong>${item.fragrance.name}</strong>
 
 <br>
 
-<small>
-
-${item.fragrance.brand}
-
-</small>
+<small>${item.fragrance.brand}</small>
 
 </li>
 
 `).join("")}
 
 </ol>
+
+`
+
+:
+
+""
+
+}
 
 
 
@@ -1022,7 +786,7 @@ ${item.fragrance.brand}
 
 
 
-},1400);
+    },1400);
 
 }
 
@@ -1036,7 +800,7 @@ Quick Search Buttons
 
 function fill(text){
 
-    document.getElementById("q").value=text;
+    document.getElementById("q").value = text;
 
     ask();
 
