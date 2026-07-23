@@ -361,3 +361,180 @@ button:disabled{
     color:#555;
 
 }
+/* =====================================================
+   LFIS v2 Luxury Consultation Preferences
+===================================================== */
+
+.preferences{
+
+    margin:32px 0;
+
+    padding:26px;
+
+    border:1px solid #e9e4dd;
+
+    border-radius:18px;
+
+    background:#faf8f5;
+
+}
+
+.preferences h4{
+
+    font-size:15px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    color:#8b7d6b;
+
+    margin-bottom:22px;
+
+}
+
+.filter-group{
+
+    margin-bottom:24px;
+
+}
+
+.filter-group:last-child{
+
+    margin-bottom:0;
+
+}
+
+.filter-label{
+
+    display:block;
+
+    margin-bottom:12px;
+
+    font-size:14px;
+
+    color:#666;
+
+    font-weight:600;
+
+}
+
+.filter-pills{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.pill{
+
+    cursor:pointer;
+
+}
+
+.pill input{
+
+    display:none;
+
+}
+
+.pill span{
+
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    border:1px solid #d9d4cd;
+
+    background:white;
+
+    color:#555;
+
+    font-size:14px;
+
+    transition:all .25s ease;
+
+    user-select:none;
+
+}
+
+.pill:hover span{
+
+    background:#f3f0eb;
+
+    border-color:#cfc8be;
+
+}
+
+.pill input:checked + span{
+
+    background:#222;
+
+    color:white;
+
+    border-color:#222;
+
+    box-shadow:0 6px 16px rgba(0,0,0,.12);
+
+}
+
+.preferences{
+
+    animation:fadeCard .6s ease;
+
+}
+
+/* Better spacing */
+
+.quick-search{
+
+    margin-top:32px;
+
+}
+
+.quick-search span{
+
+    font-size:13px;
+
+    color:#888;
+
+    letter-spacing:.5px;
+
+}
+
+input#q{
+
+    margin-top:8px;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .preferences{
+
+        padding:20px;
+
+    }
+
+    .filter-pills{
+
+        gap:8px;
+
+    }
+
+    .pill span{
+
+        padding:9px 14px;
+
+        font-size:13px;
+
+    }
+
+}
