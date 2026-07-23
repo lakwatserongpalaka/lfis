@@ -1041,10 +1041,3 @@ function fill(text){
     ask();
 
 }
-function fill(text){
-
-    document.getElementById("q").value = text;
-
-    ask();
-
-}
