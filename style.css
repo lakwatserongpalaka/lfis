@@ -538,3 +538,138 @@ input#q{
     }
 
 }
+/* =====================================================
+   LFIS Luxury Reveal Animation
+===================================================== */
+
+.fade-in{
+
+    opacity:0;
+
+    animation:lfisReveal 1.2s ease forwards;
+
+}
+
+@keyframes lfisReveal{
+
+    0%{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+        filter:blur(10px);
+
+    }
+
+    40%{
+
+        opacity:.25;
+
+        filter:blur(6px);
+
+    }
+
+    70%{
+
+        opacity:.7;
+
+        filter:blur(2px);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+        filter:blur(0);
+
+    }
+
+}
+
+.loading{
+
+    animation:
+
+        pulse 1.3s infinite;
+
+}
+
+.match-circle{
+
+    width:84px;
+
+    height:84px;
+
+    border-radius:50%;
+
+    background:#222;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+.match-circle span{
+
+    font-size:12px;
+
+    margin-top:2px;
+
+}
+
+.recommendation-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:20px;
+
+}
+
+.family{
+
+    color:#8b7d6b;
+
+    font-style:italic;
+
+    margin-bottom:20px;
+
+}
+
+@media(max-width:768px){
+
+    .recommendation-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .match-circle{
+
+        align-self:center;
+
+    }
+
+}
