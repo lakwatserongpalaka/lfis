@@ -264,3 +264,100 @@ button:disabled{
     cursor:not-allowed;
 
 }
+/* ================================
+   LFIS v2 Recommendation Card
+================================ */
+
+.recommendation h4{
+
+    margin-top:22px;
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    color:#8b7d6b;
+
+}
+
+.recommendation ul,
+.recommendation ol{
+
+    margin-top:10px;
+
+    margin-left:20px;
+
+    line-height:1.8;
+
+}
+
+.recommendation small{
+
+    color:#888;
+
+}
+
+.match{
+
+    margin:20px 0;
+
+}
+
+.match span{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#777;
+
+    margin-bottom:6px;
+
+}
+
+.bar{
+
+    height:10px;
+
+    background:#ece8e2;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+}
+
+.fill{
+
+    height:100%;
+
+    background:#8b7d6b;
+
+    transition:width .8s ease;
+
+}
+
+.match strong{
+
+    display:block;
+
+    margin-top:8px;
+
+}
+
+.editorial{
+
+    line-height:1.8;
+
+}
+
+.consultant{
+
+    font-style:italic;
+
+    color:#555;
+
+}
