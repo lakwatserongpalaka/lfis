@@ -400,6 +400,17 @@ const words = input
 
 
         <p class="editorial">
+        <p>
+
+<strong>Your scent profile</strong>
+
+</p>
+
+<p>
+
+Based on your search for "<strong>${input}</strong>", LFIS looked for fragrances that best match your desired mood, occasion, and fragrance style.
+
+</p>
 
         ${best.editorial}
 
