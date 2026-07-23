@@ -343,164 +343,193 @@ const words = input
 
 
 
-        out.innerHTML=`
+      out.innerHTML = `
 
-        <div class="recommendation">
+<div class="recommendation">
 
-        <p class="label">
+    <p class="label">
+        LFIS RECOMMENDATION
+    </p>
 
-        BEST MATCH
+    <h2>${best.name}</h2>
 
-        </p>
+    <h3>${best.brand}</h3>
 
+    <p><strong>${best.family}</strong></p>
 
-
-        <h2>
-
-        ${best.name}
-
-        </h2>
-
-
-
-        <h3>
-
-        ${best.brand}
-
-        </h3>
-
-
-
-        <p>
-
-        <strong>${best.family}</strong>
-
-        </p>
-
-
-
-        <div class="match">
+    <div class="match">
 
         <span>LFIS Match</span>
 
         <div class="bar">
-
-        <div class="fill"
-
-        style="width:${percent}%">
-
+            <div class="fill" style="width:${percent}%"></div>
         </div>
 
-        </div>
+        <strong>${percent}% Match</strong>
 
-        <strong>${percent}%</strong>
+    </div>
 
-        </div>
+    <hr>
 
+    <h4>Your Scent Profile</h4>
 
+    <p>
 
-        <p class="editorial">
-        <p>
+        Based on your search for
+        "<strong>${input}</strong>",
+        LFIS analyzed your preferred mood, occasion, fragrance family and overall style to find the closest match.
 
-<strong>Your scent profile</strong>
+    </p>
 
-</p>
+    <hr>
 
-<p>
+    <h4>Fragrance Personality</h4>
 
-Based on your search for "<strong>${input}</strong>", LFIS looked for fragrances that best match your desired mood, occasion, and fragrance style.
+    <p>
 
-</p>
+        ${best.personality || "Modern, refined and versatile."}
+
+    </p>
+
+    <hr>
+
+    <h4>Perfect For</h4>
+
+    <p>
+
+        ${(best.occasion || []).map(x => "✓ " + x).join(" • ")}
+
+    </p>
+
+    <hr>
+
+    <h4>Mood</h4>
+
+    <p>
+
+        ${(best.mood || []).join(" • ")}
+
+    </p>
+
+    <hr>
+
+    <h4>Style</h4>
+
+    <p>
+
+        ${(best.style || []).join(" • ")}
+
+    </p>
+
+    <hr>
+
+    <h4>Editorial</h4>
+
+    <p class="editorial">
 
         ${best.editorial}
 
-        </p>
+    </p>
 
+    <hr>
 
+    <h4>Consultant's Recommendation</h4>
 
-        <hr>
-
-
-
-        <p>
-
-        <strong>Consultant's Recommendation</strong>
-
-        </p>
-
-        <p>
+    <p class="consultant">
 
         ${best.consultant}
 
-        </p>
+    </p>
 
+    <hr>
 
+    <h4>Why LFIS Chose This Fragrance</h4>
 
-        <hr>
-
-
-
-<p><strong>Why LFIS chose this fragrance</strong></p>
-
-<ul>
-
-${
-(best.occasion || [])
-    .slice(0,2)
-    .map(item => `<li>Excellent for ${item}.</li>`)
-    .join("")
-}
-
-${
-(best.style || [])
-    .slice(0,2)
-    .map(item => `<li>Matches a ${item} style.</li>`)
-    .join("")
-}
-
-${
-(best.mood || [])
-    .slice(0,2)
-    .map(item => `<li>Ideal if you're looking for a ${item} mood.</li>`)
-    .join("")
-}
-
-</ul>
+    <ul>
 
         ${
-        top3.length>1?
+        (best.occasion || [])
+            .slice(0,2)
+            .map(x=>`<li>Excellent for <strong>${x}</strong>.</li>`)
+            .join("")
+        }
+
+        ${
+        (best.style || [])
+            .slice(0,2)
+            .map(x=>`<li>Matches a <strong>${x}</strong> fragrance style.</li>`)
+            .join("")
+        }
+
+        ${
+        (best.mood || [])
+            .slice(0,2)
+            .map(x=>`<li>Creates a <strong>${x}</strong> impression.</li>`)
+            .join("")
+        }
+
+    </ul>
+
+    <hr>
+
+    <h4>LFIS Verdict</h4>
+
+    <p>
+
+        ${
+            best.recommendationScore
+
+            ?
+
+            `With an LFIS Recommendation Score of <strong>${best.recommendationScore}/100</strong>, this fragrance is one of the strongest matches currently available in the LFIS fragrance library.`
+
+            :
+
+            `A highly recommended fragrance based on your consultation profile.`
+        }
+
+    </p>
+
+    ${
+        top3.length > 1
+
+        ?
 
         `
 
         <hr>
 
-        <p>
-
-        <strong>You may also like</strong>
-
-        </p>
+        <h4>You May Also Like</h4>
 
         <ol>
 
-        ${top3.slice(1).map(x=>
+            ${top3.slice(1).map(item=>`
 
-        `<li>${x.fragrance.brand} — ${x.fragrance.name}</li>`
+            <li>
 
-        ).join("")}
+                <strong>${item.fragrance.name}</strong>
+
+                <br>
+
+                <small>${item.fragrance.brand}</small>
+
+            </li>
+
+            `).join("")}
 
         </ol>
 
         `
 
-        :""
+        :
 
-        }
+        ""
 
-        </div>
+    }
 
-        `;
+</div>
 
-    },1400);
+`;
 
 }
 
