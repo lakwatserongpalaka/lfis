@@ -772,13 +772,19 @@ const top3=results
 
 
 
-    const percent=Math.min(
+    const percent = Math.max(
+
+    72,
+
+    Math.min(
 
         99,
 
         Math.round(top3[0].score*2.5)
 
-    );
+    )
+
+);
 
 
 
