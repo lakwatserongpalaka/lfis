@@ -1,8 +1,9 @@
 let fragrances = [];
 
-
 /*
-    LFIS LIBRARY LOADER
+==========================================
+LFIS LIBRARY LOADER
+==========================================
 */
 
 fetch("data/fragrances.json")
@@ -20,7 +21,7 @@ fetch("data/fragrances.json")
         fragrances = data;
 
         console.log(
-            "LFIS Library Loaded",
+            "LFIS Library Loaded:",
             fragrances.length,
             "fragrances"
         );
@@ -28,10 +29,7 @@ fetch("data/fragrances.json")
     })
     .catch(error => {
 
-        console.error(
-            "LFIS Library Error:",
-            error
-        );
+        console.error(error);
 
     });
 
@@ -39,38 +37,45 @@ fetch("data/fragrances.json")
 
 
 /*
-    LFIS CONSULTATION ENGINE
+==========================================
+LFIS CONSULTATION ENGINE
+==========================================
 */
 
-function ask() {
+function ask(){
 
-
-    const input = document
+    const input=document
         .getElementById("q")
         .value
         .toLowerCase()
         .trim();
 
+    const out=document.getElementById("out");
 
-    const out = document.getElementById("out");
-
-    const button = document.querySelector("button");
-
+    const button=document.querySelector("button");
 
 
-    if (!input) {
 
-        out.innerHTML = `
+    if(input===""){
+
+        out.innerHTML=`
 
         <div class="empty">
 
-        <h3>
-        Tell me what kind of scent you are looking for.
-        </h3>
+        <h3>Tell me what you're looking for.</h3>
 
         <p>
-        Try:
-        fresh • woody • office • luxury • date • beach
+
+        Examples:
+
+        fresh luxury office
+
+        woody date
+
+        beach vacation
+
+        executive
+
         </p>
 
         </div>
@@ -83,16 +88,13 @@ function ask() {
 
 
 
-    if (fragrances.length === 0) {
+    if(fragrances.length===0){
 
+        out.innerHTML=`
 
-        out.innerHTML = `
+        <div class="loading">
 
-        <div class="empty">
-
-        <h3>
-        Fragrance library is still loading.
-        </h3>
+        Loading LFIS Library...
 
         </div>
 
@@ -104,33 +106,33 @@ function ask() {
 
 
 
-    button.disabled = true;
+    button.disabled=true;
 
 
 
-    const messages = [
+    const loading=[
 
         "Consulting the fragrance library...",
 
-        "Reviewing fragrance profiles...",
+        "Analyzing fragrance personality...",
 
-        "Analyzing scent personality...",
+        "Comparing scent profiles...",
 
-        "Preparing your consultation..."
+        "Preparing recommendation..."
 
     ];
 
 
 
-    let index = 0;
+    let i=0;
 
 
 
-    out.innerHTML = `
+    out.innerHTML=`
 
     <div class="loading">
 
-    ${messages[0]}
+    ${loading[0]}
 
     </div>
 
@@ -138,20 +140,17 @@ function ask() {
 
 
 
-    const interval = setInterval(()=>{
+    const timer=setInterval(()=>{
 
+        i++;
 
-        index++;
+        if(i<loading.length){
 
-
-        if(index < messages.length){
-
-
-            out.innerHTML = `
+            out.innerHTML=`
 
             <div class="loading">
 
-            ${messages[index]}
+            ${loading[i]}
 
             </div>
 
@@ -159,121 +158,93 @@ function ask() {
 
         }
 
-
-    },400);
+    },350);
 
 
 
 
 
     /*
-        LFIS SCORING SYSTEM
+    ==========================================
+    LFIS MATCH ENGINE
+    ==========================================
     */
 
-
-    const keywords = input
+    const words=input
         .split(" ")
-        .filter(word => word.length > 0);
+        .filter(x=>x.length>0);
 
 
 
-    const scored = fragrances.map(f => {
+    const results=fragrances.map(f=>{
 
+        let score=0;
 
-        let score = 0;
+        const searchable=[
 
+            f.brand,
 
+            f.name,
 
-        const brand =
-            (f.brand || "")
-            .toLowerCase();
+            f.family,
 
+            f.personality,
 
+            ...(f.keywords||[]),
 
-        const name =
-            (f.name || "")
-            .toLowerCase();
+            ...(f.mood||[]),
 
+            ...(f.occasion||[]),
 
+            ...(f.style||[]),
 
-        const family =
-            (f.family || "")
-            .toLowerCase();
-
-
-
-        const allKeywords = [
-
-            ...keywords,
-
-            ...(f.keywords || []),
-
-            ...(f.mood || []),
-
-            ...(f.occasion || []),
-
-            ...(f.style || [])
+            ...(f.searchKeywords||[])
 
         ]
-        .map(x => String(x).toLowerCase());
+        .join(" ")
+        .toLowerCase();
 
 
 
+        words.forEach(word=>{
 
+            if(searchable.includes(word)){
 
-        keywords.forEach(word => {
+                score+=10;
 
-
-            if(brand.includes(word)){
-                score += 8;
             }
-
-
-            if(name.includes(word)){
-                score += 8;
-            }
-
-
-            if(family.includes(word)){
-                score += 6;
-            }
-
-
-            if(allKeywords.some(item =>
-                item.includes(word)
-            )){
-                score += 10;
-            }
-
 
         });
 
 
 
-        return {
+        if(f.recommendationScore){
+
+            score+=f.recommendationScore/10;
+
+        }
+
+
+
+        return{
 
             fragrance:f,
 
-            score:score
+            score
 
         };
-
 
     });
 
 
 
+    const top3=results
 
+        .filter(x=>x.score>0)
 
-    const result = scored
+        .sort((a,b)=>b.score-a.score)
 
-        .filter(item => item.score > 0)
-
-        .sort((a,b)=>
-            b.score - a.score
-        )[0]?.fragrance;
-
-
+        .slice(0,3);
 
 
 
@@ -281,127 +252,193 @@ function ask() {
 
     setTimeout(()=>{
 
-
-        clearInterval(interval);
-
+        clearInterval(timer);
 
         button.disabled=false;
 
 
 
+        if(top3.length===0){
 
-        if(result){
-
-
-
-            out.innerHTML = `
-
-
-            <div class="recommendation">
-
-
-            <p class="label">
-            Based on your consultation...
-            </p>
-
-
-
-            <h2>
-            ${result.name || ""}
-            </h2>
-
-
-
-            <h3>
-            ${result.brand || ""}
-            </h3>
-
-
-
-            <p>
-            <strong>
-            ${result.family || ""}
-            </strong>
-            </p>
-
-
-
-            <p class="editorial">
-
-            ${result.editorial || 
-            "A fragrance selected based on your scent profile."}
-
-            </p>
-
-
-
-            <hr>
-
-
-
-            <p class="consultant">
-
-            ${result.consultant || ""}
-
-            </p>
-
-
-
-            </div>
-
-
-            `;
-
-
-
-        } else {
-
-
-
-            out.innerHTML = `
-
+            out.innerHTML=`
 
             <div class="empty">
 
-
-            <h3>
-            I need a little more scent direction.
-            </h3>
-
-
+            <h3>No recommendation found.</h3>
 
             <p>
 
             Try:
-            <br><br>
+
+            office
+
+            luxury
+
+            woody
+
+            beach
+
+            executive
 
             fresh
-            <br>
-            woody
-            <br>
-            luxury
-            <br>
-            office
-            <br>
-            date night
 
             </p>
 
-
             </div>
-
 
             `;
 
+            return;
 
         }
 
 
 
+        const best=top3[0].fragrance;
+
+        const percent=Math.min(
+            99,
+            Math.round(top3[0].score*3)
+        );
+
+
+
+        out.innerHTML=`
+
+        <div class="recommendation">
+
+        <p class="label">
+
+        BEST MATCH
+
+        </p>
+
+
+
+        <h2>
+
+        ${best.name}
+
+        </h2>
+
+
+
+        <h3>
+
+        ${best.brand}
+
+        </h3>
+
+
+
+        <p>
+
+        <strong>${best.family}</strong>
+
+        </p>
+
+
+
+        <div class="match">
+
+        <span>LFIS Match</span>
+
+        <div class="bar">
+
+        <div class="fill"
+
+        style="width:${percent}%">
+
+        </div>
+
+        </div>
+
+        <strong>${percent}%</strong>
+
+        </div>
+
+
+
+        <p class="editorial">
+
+        ${best.editorial}
+
+        </p>
+
+
+
+        <hr>
+
+
+
+        <p>
+
+        <strong>Consultant's Recommendation</strong>
+
+        </p>
+
+        <p>
+
+        ${best.consultant}
+
+        </p>
+
+
+
+        <hr>
+
+
+
+        <p>
+
+        <strong>Why LFIS chose this fragrance</strong>
+
+        </p>
+
+        <ul>
+
+        <li>Matches your search keywords.</li>
+
+        <li>Fits the requested mood and occasion.</li>
+
+        <li>High recommendation score.</li>
+
+        </ul>
+
+        ${
+        top3.length>1?
+
+        `
+
+        <hr>
+
+        <p>
+
+        <strong>You may also like</strong>
+
+        </p>
+
+        <ol>
+
+        ${top3.slice(1).map(x=>
+
+        `<li>${x.fragrance.brand} — ${x.fragrance.name}</li>`
+
+        ).join("")}
+
+        </ol>
+
+        `
+
+        :""
+
+        }
+
+        </div>
+
+        `;
 
     },1400);
-
-
 
 }
 
@@ -409,19 +446,10 @@ function ask() {
 
 
 
-/*
-    QUICK SEARCH BUTTONS
-*/
-
 function fill(text){
 
-
-    document
-    .getElementById("q")
-    .value=text;
-
+    document.getElementById("q").value=text;
 
     ask();
-
 
 }
