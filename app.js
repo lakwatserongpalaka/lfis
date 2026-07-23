@@ -1,48 +1,317 @@
 let fragrances = [];
 
 /*
-==========================================
-LFIS LIBRARY LOADER
-==========================================
+=====================================================
+LFIS v2.0
+Luxury Fragrance Intelligence System
+=====================================================
+*/
+
+
+/*
+=====================================================
+LIBRARY LOADER
+=====================================================
 */
 
 fetch("data/fragrances.json")
-    .then(response => {
 
-        if (!response.ok) {
-            throw new Error("Unable to load fragrance library");
+.then(response=>{
+
+    if(!response.ok){
+
+        throw new Error("Unable to load LFIS Library");
+
+    }
+
+    return response.json();
+
+})
+
+.then(data=>{
+
+    fragrances=data;
+
+    console.log(
+
+        "LFIS Library Loaded",
+
+        fragrances.length,
+
+        "fragrances"
+
+    );
+
+})
+
+.catch(error=>{
+
+    console.error(error);
+
+});
+
+
+/*
+=====================================================
+LFIS CONSULTATION ENGINE
+=====================================================
+*/
+
+function ask(){
+
+
+    const input=document
+
+    .getElementById("q")
+
+    .value
+
+    .toLowerCase()
+
+    .trim();
+
+
+
+    const out=document.getElementById("out");
+
+
+
+    const button=document.querySelector(
+
+        "button:not(.chip)"
+
+    );
+
+
+
+    if(input===""){
+
+        out.innerHTML=`
+
+        <div class="empty">
+
+            <h3>
+
+                Tell me what you're looking for.
+
+            </h3>
+
+            <p>
+
+                Try things like...
+
+                <br><br>
+
+                luxury office
+
+                <br>
+
+                beach vacation
+
+                <br>
+
+                quiet luxury
+
+                <br>
+
+                date night
+
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    if(fragrances.length===0){
+
+        out.innerHTML=`
+
+        <div class="loading">
+
+        Loading LFIS Library...
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    button.disabled=true;
+
+
+
+    const loading=[
+
+        "Consulting the fragrance library...",
+
+        "Reviewing fragrance personalities...",
+
+        "Analyzing scent preferences...",
+
+        "Preparing your consultation..."
+
+    ];
+
+
+
+    let loadingIndex=0;
+
+
+
+    out.innerHTML=`
+
+    <div class="loading">
+
+        ${loading[0]}
+
+    </div>
+
+    `;
+
+
+
+    const timer=setInterval(()=>{
+
+        loadingIndex++;
+
+        if(loadingIndex<loading.length){
+
+            out.innerHTML=`
+
+            <div class="loading">
+
+                ${loading[loadingIndex]}
+
+            </div>
+
+            `;
+
         }
 
-        return response.json();
-
-    })
-    .then(data => {
-
-        fragrances = data;
-
-        console.log(
-            "LFIS Library Loaded:",
-            fragrances.length,
-            "fragrances"
-        );
-
-    })
-    .catch(error => {
-
-        console.error(error);
-
-    });
-
+    },450);
 
 
 
 /*
-==========================================
-LFIS CONSULTATION ENGINE
-==========================================
+=====================================================
+CONSULTATION PREFERENCES
+=====================================================
 */
 
-function ask(){
+const selectedGender=document.querySelector(
+
+'input[name="gender"]:checked'
+
+).id;
+
+
+
+const selectedSeason=document.querySelector(
+
+'input[name="season"]:checked'
+
+).id;
+
+
+
+const selectedPerformance=document.querySelector(
+
+'input[name="performance"]:checked'
+
+).id;
+
+
+
+/*
+=====================================================
+SYNONYM ENGINE
+=====================================================
+*/
+
+const synonymMap={
+
+office:"office",
+
+corporate:"office",
+
+work:"office",
+
+meeting:"office",
+
+business:"office",
+
+executive:"executive",
+
+ceo:"executive",
+
+boss:"executive",
+
+manager:"executive",
+
+expensive:"luxury",
+
+classy:"luxury",
+
+premium:"luxury",
+
+elegant:"luxury",
+
+hotel:"hotel lobby",
+
+lobby:"hotel lobby",
+
+beach:"vacation",
+
+tropical:"vacation",
+
+island:"vacation",
+
+holiday:"vacation",
+
+summer:"summer",
+
+winter:"winter",
+
+autumn:"autumn",
+
+fall:"autumn",
+
+spring:"spring",
+
+romantic:"date",
+
+date:"date",
+
+dinner:"date",
+
+fresh:"fresh",
+
+clean:"fresh",
+
+crisp:"fresh"
+
+};
+
+
+
+const words=input
+
+.split(/\s+/)
+
+.filter(Boolean)
+
+.map(word=>synonymMap[word]||word);
+    function ask(){
 
     const input=document
         .getElementById("q")
@@ -216,80 +485,227 @@ const words = input
 
 
 
-    const results=fragrances.map(f=>{
+   const results = fragrances.map(f=>{
 
-        let score=0;
+    let score = 0;
 
-        const searchable=[
+    const searchable=[
 
-            f.brand,
+        f.brand,
 
-            f.name,
+        f.name,
 
-            f.family,
+        f.family,
 
-            f.personality,
+        f.personality,
 
-            ...(f.keywords||[]),
+        ...(f.keywords||[]),
 
-            ...(f.mood||[]),
+        ...(f.mood||[]),
 
-            ...(f.occasion||[]),
+        ...(f.occasion||[]),
 
-            ...(f.style||[]),
+        ...(f.style||[]),
 
-            ...(f.searchKeywords||[])
+        ...(f.searchKeywords||[])
 
-        ]
-        .join(" ")
-        .toLowerCase();
+    ]
 
+    .join(" ")
 
-
-        words.forEach(word=>{
-
-            if(searchable.includes(word)){
-
-                score+=10;
-
-            }
-
-        });
+    .toLowerCase();
 
 
 
-        if(f.recommendationScore){
+    /*
+    ==========================
+    Keyword Matching
+    ==========================
+    */
 
-            score+=f.recommendationScore/10;
+    words.forEach(word=>{
+
+        if(searchable.includes(word)){
+
+            score += 12;
 
         }
-
-
-
-        return{
-
-            fragrance:f,
-
-            score
-
-        };
 
     });
 
 
 
-    const top3=results
+    /*
+    ==========================
+    Brand Bonus
+    ==========================
+    */
 
-        .filter(x=>x.score>0)
+    if(
 
-        .sort((a,b)=>b.score-a.score)
+        input.includes((f.brand||"").toLowerCase())
 
-        .slice(0,3);
+    ){
+
+        score += 40;
+
+    }
 
 
 
+    /*
+    ==========================
+    Exact Name Bonus
+    ==========================
+    */
+
+    if(
+
+        input.includes((f.name||"").toLowerCase())
+
+    ){
+
+        score += 80;
+
+    }
 
 
+
+    /*
+    ==========================
+    Gender Filter
+    ==========================
+    */
+
+    const gender=(f.gender||"unisex").toLowerCase();
+
+    if(
+
+        selectedGender!="all"
+
+        &&
+
+        gender!=selectedGender
+
+    ){
+
+        score=-999;
+
+    }
+
+
+
+    /*
+    ==========================
+    Season Filter
+    ==========================
+    */
+
+    if(
+
+        selectedSeason!="season-any"
+
+    ){
+
+        const season=
+
+        (f.season||[])
+
+        .join(" ")
+
+        .toLowerCase();
+
+
+
+        if(
+
+            !season.includes(
+
+                selectedSeason
+
+            )
+
+        ){
+
+            score-=35;
+
+        }
+
+    }
+
+
+
+    /*
+    ==========================
+    Performance Filter
+    ==========================
+    */
+
+    if(
+
+        selectedPerformance!="performance-any"
+
+    ){
+
+        if(
+
+            (f.performance||"")
+
+            .toLowerCase()
+
+            !=
+
+            selectedPerformance
+
+        ){
+
+            score-=25;
+
+        }
+
+    }
+
+
+
+    /*
+    ==========================
+    LFIS Recommendation Bonus
+    ==========================
+    */
+
+    if(
+
+        f.recommendationScore
+
+    ){
+
+        score +=
+
+        f.recommendationScore/4;
+
+    }
+
+
+
+    return{
+
+        fragrance:f,
+
+        score
+
+    };
+
+});
+
+
+
+const top3=results
+
+.filter(x=>x.score>0)
+
+.sort((a,b)=>b.score-a.score)
+
+.slice(0,3);
     setTimeout(()=>{
 
         clearInterval(timer);
