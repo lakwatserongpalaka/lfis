@@ -31,16 +31,35 @@
 
     <h3>What are you looking for today?</h3>
 
-    <p class="subtitle">
-        Describe a fragrance, a mood, an occasion,
-        or simply how you'd like to feel.
-    </p>
+<p class="subtitle">
+    Describe a fragrance, a mood, an occasion,
+    or simply how you'd like to feel.
+</p>
 
-    <input
-        id="q"
-        type="text"
-        placeholder="e.g. Something that smells like a luxury hotel lobby..."
-    >
+<div class="gender-filter">
+
+    <label>
+        <input type="checkbox" id="male">
+        Male
+    </label>
+
+    <label>
+        <input type="checkbox" id="female">
+        Female
+    </label>
+
+    <label>
+        <input type="checkbox" id="unisex">
+        Unisex
+    </label>
+
+</div>
+
+<input
+    id="q"
+    type="text"
+    placeholder="e.g. Something that smells like a luxury hotel lobby..."
+>
 
     <button onclick="ask()">
         Begin Consultation
