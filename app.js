@@ -170,9 +170,49 @@ function ask(){
     ==========================================
     */
 
-    const words=input
-        .split(" ")
-        .filter(x=>x.length>0);
+    /*
+==========================================
+LFIS SYNONYM ENGINE
+==========================================
+*/
+
+const synonymMap = {
+
+    corporate: "office",
+    work: "office",
+    working: "office",
+    business: "office",
+    boardroom: "office",
+
+    classy: "luxury",
+    expensive: "luxury",
+    premium: "luxury",
+    elegant: "luxury",
+
+    ceo: "executive",
+    boss: "executive",
+    manager: "executive",
+
+    sexy: "date",
+    romantic: "date",
+    dinner: "date",
+
+    beach: "vacation",
+    tropical: "vacation",
+    island: "vacation",
+    holiday: "vacation",
+
+    clean: "fresh",
+    crisp: "fresh",
+
+    masculine: "men",
+    feminine: "women"
+};
+
+const words = input
+    .split(/\s+/)
+    .filter(word => word.length > 0)
+    .map(word => synonymMap[word] || word);
 
 
 
