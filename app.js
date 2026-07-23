@@ -531,15 +531,15 @@ const words = input
 
 `;
 
+    },1400);
+
 }
-
-
 
 
 
 function fill(text){
 
-    document.getElementById("q").value=text;
+    document.getElementById("q").value = text;
 
     ask();
 
